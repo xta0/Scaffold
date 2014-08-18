@@ -1,0 +1,92 @@
+{
+  "type" : "object",
+  "description" : "预订店铺列表",
+  "mappedType" : "MtopDdReserveStorelistResponse",
+  "properties" : {
+    "data" : {
+      "type" : "object",
+      "description" : "API业务对象",
+      "mappedType" : "MtopDdReserveStorelistResponseData",
+      "properties" : {
+        "list" : {
+          "type" : "array",
+          "required" : false,
+          "description" : "商户列表",
+          "items" : {
+            "type" : "object",
+            "description" : "",
+            "mappedType" : "MtopDdReserveStorelistResponseDataList",
+            "properties" : {
+              "address" : {
+                "type" : "string",
+                "required" : false,
+                "description" : "商户地址",
+                "default" : null
+              },
+              "distance" : {
+                "type" : "number",
+                "required" : false,
+                "description" : "与当前的距离",
+                "default" : 0.0
+              },
+              "flags" : {
+                "type" : "integer",
+                "required" : false,
+                "description" : "商户标位",
+                "default" : 0
+              },
+              "perConsumptionPrice" : {
+                "type" : "number",
+                "required" : false,
+                "description" : "平均消费",
+                "default" : 0.0
+              },
+              "pictureUrl" : {
+                "type" : "string",
+                "required" : false,
+                "description" : "商户图片",
+                "default" : null
+              },
+              "posx" : {
+                "type" : "number",
+                "required" : false,
+                "description" : "经度",
+                "default" : 0.0
+              },
+              "posy" : {
+                "type" : "number",
+                "required" : false,
+                "description" : "纬度",
+                "default" : 0.0
+              },
+              "score" : {
+                "type" : "number",
+                "required" : false,
+                "description" : "评价平均分数",
+                "default" : 0.0
+              },
+              "storeId" : {
+                "type" : "string",
+                "required" : false,
+                "description" : "商户id",
+                "default" : null
+              },
+              "storeName" : {
+                "type" : "string",
+                "required" : false,
+                "description" : "商户名称",
+                "default" : null
+              }
+            }
+          }
+        },
+        "total" : {
+          "type" : "integer",
+          "required" : true,
+          "description" : "总数量",
+          "default" : 0
+        }
+      }
+    }
+  }
+}

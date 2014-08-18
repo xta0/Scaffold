@@ -4,20 +4,22 @@
 
 
 require 'nokogiri'
-require './xib_2_objc.rb'
+require './txqs_mappings.rb'
 
 class UIKitFactory
   
-  def self.UIKitObj(xml_obj,name)
+  def self.UIKitObj(xml_obj,name,clz)
     
       if xml_obj.name == 'label'
-        return UILabel.new(xml_obj,name)
+        return UILabel.new(xml_obj,name,clz)
       elsif xml_obj.name == 'button'
-        return UIButton.new(xml_obj,name)
+        return UIButton.new(xml_obj,name,clz)
       elsif xml_obj.name == 'imageView'
-        return UIImageView.new(xml_obj,name)
+        return UIImageView.new(xml_obj,name,clz)
+      elsif xml_obj.name == 'tableViewCell'
+        return UITableViewCell.new(xml_obj,name,clz)
       else
-        return UIView.new(xml_obj,name)
+        return UIView.new(xml_obj,name,clz)
       end
   end
   
@@ -26,16 +28,18 @@ end
 class UIView
     
   protected
-    attr_accessor :name, :xml_obj
-
-  
+    attr_accessor :xml_obj
+    
   public
+    attr_accessor :name, :clz
     attr_accessor :x, :y, :w, :h
     attr_accessor :background_color
     attr_accessor :alpha
     attr_accessor :hidden
     
-    def initialize(xml_obj,name)
+    def initialize(xml_obj,name,clz)
+      
+       @clz = clz
        @name = name
        @xml_obj = xml_obj
        rect = xml_obj.at_xpath("rect")
@@ -68,9 +72,9 @@ class UIView
     attr_accessor :button_type, :title_font, :title_color_normal, :title_color_highlight, :title_normal, :title_highlight
     attr_accessor :btn_type_4_UIKit
     
-    def initialize(xml_obj,name)
+    def initialize(xml_obj,name,clz)
       
-        super(xml_obj,name)
+        super(xml_obj,name,clz)
         
         @normal_state_dict = Hash.new
         @highlight_state_dict = Hash.new
@@ -158,9 +162,9 @@ class UIView
   class UILabel < UIView
     attr_accessor :font, :text, :text_color, :text_alignment, :text_linebreak_mode
     
-    def initialize(xml_obj,name)
+    def initialize(xml_obj,name,clz)
       
-      super(xml_obj,name)
+      super(xml_obj,name,clz)
       
       #font:
       font = xml_obj.at_xpath("fontDescription")
@@ -175,8 +179,12 @@ class UIView
         
       #text color:
       color = xml_obj.at_xpath("color")
-      @text_color = "[UIColor colorWithRed:#{color["red"]} green:#{color["green"]} blue:#{color["blue"]} alpha:#{color["alpha"]}]"
-      
+      if color 
+        @text_color = MAPPINGS.colorWithRGBA(color["red"],color["green"],color["blue"],color["alpha"])
+      else
+        @text_color = MAPPINGS.colorWithRGBA(1.0,1.0,1.0,1.0)
+      end
+     
       #breakmode:
       breakmode = xml_obj["lineBreakMode"]
       if breakmode == "tailTruncation"
@@ -204,8 +212,8 @@ class UIView
       return str,Array.new
           
     end
-    
-  end
+
+end
   
   class UIImageView < UIView
   
@@ -214,3 +222,11 @@ class UIView
    end
   
   end
+
+class UITableViewCell < UIView
+  
+    def objc_code_subclass()
+      return "",[]
+    end
+end
+  

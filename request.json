@@ -1,0 +1,79 @@
+{
+  "type" : "object",
+  "description" : "预订店铺列表",
+  "mappedType" : "MtopDdReserveStorelistRequest",
+  "properties" : {
+    "API_NAME" : {
+      "type" : "string",
+      "required" : true,
+      "description" : "API的名称",
+      "default" : "mtop.dd.reserve.storelist"
+    },
+    "VERSION" : {
+      "type" : "string",
+      "required" : true,
+      "description" : "API的版本号",
+      "default" : "1.0"
+    },
+    "NEED_ECODE" : {
+      "type" : "boolean",
+      "required" : true,
+      "description" : "API的签名方式",
+      "default" : false
+    },
+    "NEED_SESSION" : {
+      "type" : "boolean",
+      "required" : true,
+      "description" : "淘宝无线用户会话ID",
+      "default" : false
+    },
+    "reserveRang" : {
+      "type" : "integer",
+      "required" : false,
+      "description" : "reserveRang",
+      "default" : 0
+    },
+    "posY" : {
+      "type" : "number",
+      "required" : false,
+      "description" : "posY",
+      "default" : 0.0
+    },
+    "posX" : {
+      "type" : "number",
+      "required" : false,
+      "description" : "posX",
+      "default" : 0.0
+    },
+    "pageNo" : {
+      "type" : "integer",
+      "required" : false,
+      "description" : "pageNo",
+      "default" : 0
+    },
+    "pageSize" : {
+      "type" : "integer",
+      "required" : false,
+      "description" : "pageSize",
+      "default" : 0
+    },
+    "capacity" : {
+      "type" : "integer",
+      "required" : false,
+      "description" : "capacity",
+      "default" : 0
+    },
+    "reserveDate" : {
+      "type" : "string",
+      "required" : true,
+      "description" : "reserveDate",
+      "default" : null
+    },
+    "city" : {
+      "type" : "integer",
+      "required" : true,
+      "description" : "city",
+      "default" : 0
+    }
+  }
+}

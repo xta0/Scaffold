@@ -1,6 +1,6 @@
 #created by jayson.xu
 
-module XIB2OBJC
+module MAPPINGS
 
   #xib's class type <=> objc
   OBJC_CLASS = {"view" => "UIView", 
@@ -18,7 +18,7 @@ module XIB2OBJC
   
 
   #COLOR
-  def colorWithRGBA(r,g,b,a)
+  def MAPPINGS.colorWithRGBA(r,g,b,a)
     return "[UIColor colorWithRed:#{r} green:#{g} blue:#{b} alpha:#{a}]"
   end
     
