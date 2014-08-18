@@ -38,10 +38,16 @@ class XibParser
         subviews = o.xpath("subviews/*") ## subviews => Nokogiri::XML::NodeSet
         #get subviews class
         subviews.each do |v| ## v => Nokogiri::XML::Element
-          
-          objc_clz  = MAPPINGS::OBJC_CLASS[v.name]
+ 
+          objc_clz  = v["customClass"] ? v["customClass"] : MAPPINGS::OBJC_CLASS[v.name]
           objc_name = v.at_xpath('accessibility')["label"] 
           obj = UIKitFactory.UIKitObj(v,objc_name,objc_clz)
+          
+          ##custom import list
+          customClass = v["customClass"]
+          if customClass
+            obj.customClz = true
+          end
     
           tmp << obj
           
@@ -59,9 +65,16 @@ class XibParser
         #get subviews class
         subviews.each do |v| ## v => Nokogiri::XML::Element
 
-          objc_clz  = MAPPINGS::OBJC_CLASS[v.name]
+          objc_clz  = v["customClass"] ? v["customClass"] : MAPPINGS::OBJC_CLASS[v.name]
           objc_name = v.at_xpath('accessibility')["label"] 
           obj = UIKitFactory.UIKitObj(v,objc_name,objc_clz)
+          
+          ##custom import list
+          customClass = v["customClass"]
+          if customClass
+           obj.customClz = true
+          end
+  
           tmp << obj
           
         end ##end of subviews.each

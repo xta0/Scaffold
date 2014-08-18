@@ -31,6 +31,7 @@ class UIView
     attr_accessor :xml_obj
     
   public
+    attr_accessor :customClz
     attr_accessor :name, :clz
     attr_accessor :x, :y, :w, :h
     attr_accessor :background_color
@@ -39,7 +40,7 @@ class UIView
     attr_accessor :tag
     
     def initialize(xml_obj,name,clz)
-      
+    
        @clz = clz
        @name = name
        @xml_obj = xml_obj
@@ -56,7 +57,7 @@ class UIView
     def objc_code()
       
       str = "\n   //#{self.name}"
-      str = str+ "\n   self.#{self.name} =[[#{self.class} alloc]initWithFrame:CGRectMake(#{self.x},#{self.y},#{self.w},#{self.h})];"
+      str = str+ "\n   self.#{self.name} =[[#{self.clz} alloc]initWithFrame:CGRectMake(#{self.x},#{self.y},#{self.w},#{self.h})];"
       if self.tag 
         str = str+ "\n   self.tag = #{self.tag};" 
       end
@@ -67,6 +68,10 @@ class UIView
         
       return str,sels
           
+    end
+    
+    def objc_code_subclass()
+      return "",[]
     end
   
   end

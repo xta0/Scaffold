@@ -16,8 +16,15 @@ def createViewHeaderFile(dict,parentClz)
     f = File.open("./#{k}.h","w") do |f|
   
       f.puts "\n// created by xib_2_objC \n"
-      f.puts "\n//#{Time.now} \n\n"
+      f.puts "\n//`date` \n\n"
       f.puts "#import <UIKit/UIkit.h> \n\n"
+      
+      v.each do |uikit_obj|
+        if uikit_obj.customClz
+          f.puts "@class #{uikit_obj.clz};\n"
+        end
+      end
+      
       f.puts "@interface #{k} : #{parentClz} \n"
       f.puts "\n"
   
@@ -44,6 +51,13 @@ def createViewBodyFile(dict,parentClz)
     f = File.open("./#{k}.m","w") do |f|
   
       f.puts "\n#import \"#{k}.h\" \n"
+      
+      v.each do |obj|
+        if obj.customClz
+          f.puts "\n #import \"#{obj.clz}.h\""
+        end
+      end
+      
       f.puts "\n@interface #{k}()\n"
       f.puts "\n@end\n"
   
