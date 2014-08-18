@@ -15,7 +15,8 @@ def createViewHeaderFile(dict,parentClz)
 
     f = File.open("./#{k}.h","w") do |f|
   
-      f.puts "\n// created by xib_2_objC \n\n"
+      f.puts "\n// created by xib_2_objC \n"
+      f.puts "\n//#{Time.now} \n\n"
       f.puts "#import <UIKit/UIkit.h> \n\n"
       f.puts "@interface #{k} : #{parentClz} \n"
       f.puts "\n"

@@ -16,6 +16,11 @@ module MAPPINGS
   #xib's lable's linebreakmode <=> objc
   OBJC_LINEBREAK_MODE = {"tailTruncation" => "NSLineBreakByTruncatingTail"}
   
+  #xib's lable's textalignment <=>
+  OBJC_TEXT_ALIGNMENT = {"center" => "NSTextAlignmentCenter",
+                         "left" => "NSTextAlignmentLeft", 
+                         "right" => "NSTextAlignmentRight"}
+  
 
   #COLOR
   def MAPPINGS.colorWithRGBA(r,g,b,a)

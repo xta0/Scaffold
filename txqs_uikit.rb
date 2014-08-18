@@ -36,6 +36,7 @@ class UIView
     attr_accessor :background_color
     attr_accessor :alpha
     attr_accessor :hidden
+    attr_accessor :tag
     
     def initialize(xml_obj,name,clz)
       
@@ -47,6 +48,7 @@ class UIView
        @y = rect["y"].to_f
        @w = rect["width"].to_f
        @h = rect["height"].to_f
+       @tag = xml_obj["tag"]
       
     end
  
@@ -55,7 +57,9 @@ class UIView
       
       str = "\n   //#{self.name}"
       str = str+ "\n   self.#{self.name} =[[#{self.class} alloc]initWithFrame:CGRectMake(#{self.x},#{self.y},#{self.w},#{self.h})];"
-      
+      if self.tag 
+        str = str+ "\n   self.tag = #{self.tag};" 
+      end
       #返回字符串和sel数组
       code,sels = self.objc_code_subclass()
       
@@ -192,11 +196,20 @@ class UIView
       end
       
       #text:
-      @text = xml_obj["text"]
+      text = xml_obj["text"]
+      if text 
+        @text = text
+      else
+        @text = "@"";" 
+      end
       
       #alignment
-      @text_alignment = "NSTextAlignmentLeft"
-      
+      alignment = xml_obj["textAlignment"]
+      if alignment
+        @text_alignment = MAPPINGS::OBJC_TEXT_ALIGNMENT[alignment]
+      else
+        @text_alignment = "NSTextAlignmentLeft"
+      end
       
     end
     
