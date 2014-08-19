@@ -50,17 +50,29 @@ class UIView
        @w = rect["width"].to_f
        @h = rect["height"].to_f
        @tag = xml_obj["tag"]
-      
+       
+       #bkcolor:
+       color = xml_obj.at_xpath("color")
+       if(color && color["key"] == "backgroundColor")
+         @background_color = MAPPINGS.colorWithObject(color)
+       end
     end
- 
-    
+
     def objc_code()
       
       str = "\n   //#{self.name}"
       str = str+ "\n   self.#{self.name} =[[#{self.clz} alloc]initWithFrame:CGRectMake(#{self.x},#{self.y},#{self.w},#{self.h})];"
+      
+      #tag
       if self.tag 
-        str = str+ "\n   self.tag = #{self.tag};" 
+        str = str+ "\n   self.#{self.name}.tag = #{self.tag};" 
       end
+      
+      #background color
+      if self.background_color
+        str = str + "\n   self.#{self.name}.backgroundColor = #{self.background_color};"
+      end
+      
       #返回字符串和sel数组
       code,sels = self.objc_code_subclass()
       
@@ -125,7 +137,9 @@ class UIView
           
         else
           ##todo
-        end        
+        end     
+        
+
     end
     
     def objc_code()
@@ -133,9 +147,20 @@ class UIView
       str = "\n   //#{self.name}"
       str = str + "\n   self.#{self.name} = [UIButton buttonWithType:#{self.button_type}];"
       str = str + "\n   self.#{self.name}.frame = CGRectMake(#{self.x},#{self.y},#{self.w},#{self.h});"
-      str = str + "\n   [self addSubview:self.#{self.name}];"
-      ##normal state
       
+      #tag
+      if self.tag 
+        str = str+ "\n   self.#{self.name}.tag = #{self.tag};" 
+      end
+      
+      #background color
+      if self.background_color
+        str = str + "\n   self.#{self.name}.backgroundColor = #{self.background_color};"
+      end
+      
+      str = str + "\n   [self addSubview:self.#{self.name}];"
+      
+      ##normal state
       if @title_normal != nil
         str = str + "\n   [self.#{self.name} setTitle:@\"#{self.title_normal}\" forState:UIControlStateNormal];"
       end

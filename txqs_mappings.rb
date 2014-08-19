@@ -26,7 +26,22 @@ module MAPPINGS
   def MAPPINGS.colorWithRGBA(r,g,b,a)
     return "[UIColor colorWithRed:#{r} green:#{g} blue:#{b} alpha:#{a}]"
   end
+  
+  def MAPPINGS.colorWithWhiteAndAlpha(w,a)
+    return "[UIColor colorWithWhite:#{w} alpha:#{a}]"
+  end
+  
+  def MAPPINGS.colorWithObject(c)
+    
+    if(c["white"] != nil)
+      return MAPPINGS.colorWithWhiteAndAlpha(c["white"],c["alpha"])
+    elsif(c["red"] && c["green"] && c["blue"] && c["alpha"])
+      return MAPPINGS.colorWithRGBA(c["red"],c["green"],c["blue"],c["alpha"])
+    else
+      return MAPPINGS.colorWithRGBA("#{1.0}","#{1.0}","#{1.0}","#{1.0}")
+    end
+
+  end
     
   
-
 end
