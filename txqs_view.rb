@@ -17,7 +17,7 @@ def createViewHeaderFile(dict)
     f = File.open("./#{k}.h","w") do |f|
   
       f.puts "\n// created by xib_2_objC \n"
-      f.puts "\n//`date` \n\n"
+      f.puts "\n// #{Time.new.inspect}\n\n"
       f.puts "#import <UIKit/UIkit.h> \n\n"
       
       v["subviews"].each do |uikit_obj|
