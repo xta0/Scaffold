@@ -1,0 +1,49 @@
+{
+"model":[
+	{
+		"name":"TBCityMainCardPageModel",
+		"class":"TBCitySBModel",
+		"api":"mtop.taobao.mainpagecard",
+		"v":"2.0",
+		"in":["lat","lng","type"],
+		"out":[{"result":"NSDictionary"},{"open":"NSString"},{"cities":"NSArray"}]
+	},
+	{
+		"name":"TBCityMainBannerPageModel",
+		"class":"TBCitySBListModel",
+		"api":"mtop.taobao.mainpagebanner",
+		"v":"2.0",
+		"in":[],
+		"out":[]
+	}
+],
+	
+"item":[
+	{
+		"name":"TBCityMainPageCardItem",
+		"class":"TBCitySBItem",
+		"response":"./input.json"
+	},
+	{
+		"name":"TBCityMainPageBannerItem",
+		"class":"TBCitySBItem",
+		"response":"./input.json"
+	}
+],
+
+"controller":[
+	{
+		"name":"TBCityMainPageController",
+		"class":"TBCitySBTableViewController",
+		"protocols":["UITableViewDelegate","UITableViewDataSource"],
+		"models":[{"name":"cardModel","class":"TBCityMainCardPageModel"},{"name":"bannerModel","class":"TBCityMainBannerPageModel"}],
+		"datasource":{"name":"ds","class":"TBCityMainPageDataSource","cell":"TBCityMainPageCardCell"},
+		"delegate":{"name":"dl","class":"TBCityMainPageDelegate"}
+	}
+],
+
+"view":{"xib":"./xib.xml"},
+
+"author":"moxin.xt"
+
+}

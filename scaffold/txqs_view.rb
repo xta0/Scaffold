@@ -5,6 +5,13 @@ puts "============================= \n"
 puts "====根据xib创建view=========== \n"
 puts "============================= \n"
 
+
+path = ARGV[0]
+
+if(not path)
+  path = "./input.json"
+end
+
 def createViewHeaderFile(dict)
     
   dict.each do |k,v|
@@ -117,7 +124,7 @@ end
 
 
 ##parse xibs
-parser = XibParser.new('./xib.xml')
+parser = XibParser.new(path)
 v_hash = parser.parse()
 
 ##create views
