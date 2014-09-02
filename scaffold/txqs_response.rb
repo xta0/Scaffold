@@ -3,7 +3,10 @@ require 'pp'
 require './txqs_util.rb'
 
 
-
+g_name = ARGV[0]
+g_clz  = ARGV[1]
+g_path = ARGV[2]
+g_author = ARGV[3]
 
 def createItems(name,clz,path,author)
   
@@ -41,7 +44,7 @@ def createItems(name,clz,path,author)
       str = commentsOfFile("h","#{name}","#{author}")
       h.puts(str)
   
-      str = headerFileContent(["#{clz}.h"],name,clz,propList,[],[])
+      str = headerFileContent(["#{clz}"],name,clz,propList,[],[])
       h.puts(str)
     }
 
@@ -54,7 +57,7 @@ def createItems(name,clz,path,author)
       str = commentsOfFile("m","#{name}","#{author}")
       m.puts(str)
   
-      str = "#import \"#{name}.h \" \n\n"
+      str = "#import \"#{name}.h\"\n\n"
       m.puts(str)
   
       str = "@implementation #{name}\n\n"
@@ -81,5 +84,6 @@ def createItems(name,clz,path,author)
 end
 
 
+createItems(g_name,g_clz,g_path,g_author)
 
 

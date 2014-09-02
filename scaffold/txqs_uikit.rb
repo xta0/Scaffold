@@ -213,34 +213,20 @@ class UIView
         
       #text color:
       color = xml_obj.at_xpath("color")
-      if color 
-        @text_color = MAPPINGS.colorWithRGBA(color["red"],color["green"],color["blue"],color["alpha"])
-      else
-        @text_color = MAPPINGS.colorWithRGBA(1.0,1.0,1.0,1.0)
-      end
-     
+      @text_color = MAPPINGS.colorWithObject(color)
+
       #breakmode:
       breakmode = xml_obj["lineBreakMode"]
-      if breakmode == "tailTruncation"
-        @text_linebreak_mode = "NSLineBreakByTruncatingTail"
-      end
+      @text_linebreak_mode = breakmode ? MAPPINGS::OBJC_LINEBREAK_MODE[breakmode] : "NSLineBreakByTruncatingTail"
       
       #text:
-      text = xml_obj["text"]
-      if text 
-        @text = text
-      else
-        @text = "@"";" 
-      end
-      
+      text = xml_obj["text"] 
+      @text = text ? text : "@"";"
+    
       #alignment
       alignment = xml_obj["textAlignment"]
-      if alignment
-        @text_alignment = MAPPINGS::OBJC_TEXT_ALIGNMENT[alignment]
-      else
-        @text_alignment = "NSTextAlignmentLeft"
-      end
-      
+      @text_alignment = alignment ? MAPPINGS::OBJC_TEXT_ALIGNMENT[alignment] : "NSTextAlignmentLeft"
+            
     end
     
     def objc_code_subclass()
@@ -252,7 +238,7 @@ class UIView
       str = str + "\n   self.#{self.name}.textAlignment = #{self.text_alignment};"
       str = str + "\n   self.#{self.name}.lineBreakMode = #{self.text_linebreak_mode};"
       
-      return str,Array.new
+      return str,[]
           
     end
 
@@ -261,15 +247,20 @@ end
   class UIImageView < UIView
   
    def objc_code_subclass()
-     return "",Array.new
+     return "",[]
    end
   
   end
 
 class UITableViewCell < UIView
   
-    def objc_code_subclass()
-      return "",[]
-    end
+  def initialize(xml_obj,name,clz)
+    super(xml_obj,name,clz)
+    
+  end
+  
+  def objc_code_subclass()
+    return "",[]
+  end
 end
   

@@ -3,7 +3,7 @@ require 'pp'
 require './txqs_controller.rb'
 require './txqs_model.rb'
 require './txqs_response.rb'
-
+require './txqs_view.rb'
 
 def printSepLine(str)
 
@@ -71,10 +71,10 @@ response["item"].each{|item|
 
 #create views
 printSepLine("create views:")
-xib = response["view"]
+xib = response["view"]["xib"]
+createViews(xib,author)
 
-if(xib)
-  system "ruby txqs_response.rb #{xib} #{author}"
-end
 
-END{puts "SCAFFOLDING..."}
+
+
+END{puts "SUCCEED!"}

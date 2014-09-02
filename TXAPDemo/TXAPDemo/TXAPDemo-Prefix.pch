@@ -16,4 +16,6 @@
     #import "TBCitySBMVCConfig.h"
     #import "AFNetworking.h"
     #import "SVPullToRefresh.h"
+#import "UIImageView+WebCache.h"
+
 #endif

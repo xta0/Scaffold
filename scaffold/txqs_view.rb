@@ -1,137 +1,125 @@
 require './txqs_parser.rb'
 require './txqs_mappings.rb'
-
-puts "============================= \n"
-puts "====根据xib创建view=========== \n"
-puts "============================= \n"
+require './txqs_util.rb'
 
 
-path = ARGV[0]
+g_path = ARGV[0]
+g_author = ARGV[1]
 
-if(not path)
-  path = "./input.json"
-end
 
-def createViewHeaderFile(dict)
-    
-  dict.each do |k,v|
+def createViews(path,author)
+
+  ##parse xibs
+  parser = XibParser.new(path)
+  result = parser.parse()
   
+  result.each{|k,v|
+  
+    imports = []
+    props   = []
+    codes   = []
+    sels    = []   
+    clz = MAPPINGS::OBJC_CLASS[v["clz"]]
+    bind_clz = v["data"].keys[0]
+    bind_name = v["data"].values[0]
+    
+    if clz == "TBCitySBTableViewCell"
+        imports.push("TBCitySBTableViewCell")
+        imports.push(bind_clz) if(bind_clz)
+    else
+       imports.push(bind_clz) if(bind_clz)
+       props.push("@property(nonatomic,strong)#{bind_clz} *#{bind_name}") if(bind_clz && bind_name)
+    end
+
+    
+    #@class....
+    #@property
+    v["subviews"].each{|subv|
+      imports.push(subv.customClz) if(subv.customClz)
+      prop = "@property(nonatomic,strong)#{subv.clz}* #{subv.name}"
+      props.push(prop)
+      code,_sels =  subv.objc_code()
+      codes.push(code)
+      _sels.each{ |sel| sels.push(sel)}
+    }
+ 
+    
     #header
     if File.exist?("./#{k}.h")
       File.delete("./#{k}.h")
     end
 
-    f = File.open("./#{k}.h","w") do |f|
-  
-      f.puts "\n// created by xib_2_objC \n"
-      f.puts "\n// #{Time.new.inspect}\n\n"
-      f.puts "#import <UIKit/UIkit.h> \n\n"
+    File.open("./#{k}.h","w"){|f|
+      #注释
+      str = commentsOfFile("h","#{k}",author)
+      f.puts str
       
-      v["subviews"].each do |uikit_obj|
-        if uikit_obj.customClz
-          f.puts "@class #{uikit_obj.clz};\n"
-        end
-      end
-      
-      parentClz = MAPPINGS::OBJC_CLASS[v["clz"]]
-      
-      f.puts "@interface #{k} : #{parentClz} \n"
-      f.puts "\n"
-  
-      counter = 0 
-      v["subviews"].each do |uikit_obj|
-        f.puts"@property(nonatomic,strong)#{uikit_obj.clz}* #{uikit_obj.name};\n"
-        counter = counter+1
-      end
-      
-      f.puts "\n@end"
+      #头文件
+      str = headerFileContent(imports,"#{k}",clz,props,[],[])
+      f.puts str
+    }
 
-    end
-  end
-end
-
-def createViewBodyFile(dict)
-  
-  dict.each do |k,v|
-  
+    #body
     if File.exist?("./#{k}.m")
       File.delete("./#{k}.m")
     end
 
-    f = File.open("./#{k}.m","w") do |f|
-  
+    File.open("./#{k}.m","w"){|f|
+      
       f.puts "\n#import \"#{k}.h\" \n"
+      str = ""
+      imports.each{|i|
+        str += "#import \"#{i}.h\"\n"
+      }
+      f.puts str
+      str = "@interface #{k}() \n"
+      str += "\n@end\n"
+      str += "\n@implementation #{k}\n"
+      f.puts str
       
-      v["subviews"].each do |obj|
-        if obj.customClz
-          f.puts "#import \"#{obj.clz}.h\"\n"
-        end
+      str = ""
+      if clz == 'UIView'
+        str = "\n- (id)initWithFrame:(CGRect)frame \n{"
+        str += "\n  self = [super initWithFrame:frame]; \n\n  if (self) { \n"
+      elsif clz == 'TBCitySBTableViewCell'
+        str = "\n- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier \n{"
+        str += "\n  if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) { \n\n"
       end
-      
-      f.puts "\n@interface #{k}()\n"
-      f.puts "\n@end\n"
-  
-      f.puts "\n@implementation #{k}\n"
-    
-      #begin init-with-frame
-      parentClz = MAPPINGS::OBJC_CLASS[v["clz"]]
-      if parentClz == 'UIView'
-        f.puts "\n- (id)initWithFrame:(CGRect)frame \n{"
-        f.puts "\n  self = [super initWithFrame:frame]; \n\n  if (self) { \n"
-      elsif parentClz == 'UITableViewCell'
-        f.puts "\n- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier \n{"
-        f.puts "\n  if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) { \n\n"
-      end
+      f.puts str
       
       #background color
       color = v["bkcolor"]
-      
-      if(color)
-        f.puts "\n  self.backgroundColor = #{color}; \n"
-      end
-    
-      selectors = Array.new
-      #add subviews here
-      v["subviews"].each do |obj|
-        str,sels =  obj.objc_code()
-        f.puts str
-        sels.each{ |sel| selectors << sel }
-      end
-    
+      f.puts "\n  self.backgroundColor = #{color}; \n" if(color)
+        
+      codes.each{|code| f.puts code}
   
       f.puts "\n  }\n"
       #end init-with-frame 
       f.puts "\n  return self; \n}"
+      
+      #set item
+      if(bind_clz)
+        5.times{f.puts "\n"}
+        if(clz == "TBCitySBTableViewCell")
+          f.puts "- (void)setItem:(#{bind_clz} *)item{\n      [super setItem:item];\n      //todo... \n\n}\n"
+        else
+          f.puts "- (void)setItem:(#{bind_clz} *)#{bind_name}{\n      _#{bind_name} = #{bind_name};\n     //todo... \n\n}\n"
+        end
+      end
+      
     
       #add cells
       5.times{f.puts "\n"}
       f.puts "#pragma-marks - callback"
     
-      selectors.each do |sel|
-      
+      sels.each{|sel| 
         f.puts "\n#{sel}  \n"
         3.times{f.puts "\n"}
-      
-      end
-  
-  
+      }
       f.puts "\n@end\n"  
+    }
+  }
   
-  end
-end
 end
 
-
-
-##parse xibs
-parser = XibParser.new(path)
-v_hash = parser.parse()
-
-##create views
-createViewHeaderFile(v_hash)
-createViewBodyFile(v_hash)
-
-
-puts "============================= \n"
-puts "===========Success=========== \n"
-puts "============================= \n"
+createViews(g_path,g_author)

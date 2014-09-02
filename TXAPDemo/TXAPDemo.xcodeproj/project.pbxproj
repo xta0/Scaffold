@@ -49,6 +49,22 @@
 		AF4BCB2B19B4B04300658CD8 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4BCB2319B4B04300658CD8 /* AFXMLRequestOperation.m */; };
 		AF4BCB3219B4B07F00658CD8 /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4BCB2F19B4B07F00658CD8 /* UIScrollView+SVInfiniteScrolling.m */; };
 		AF4BCB3319B4B07F00658CD8 /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4BCB3119B4B07F00658CD8 /* UIScrollView+SVPullToRefresh.m */; };
+		AF4BCB3519B4B52700658CD8 /* WeatherListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF4BCB3419B4B52700658CD8 /* WeatherListCell.xib */; };
+		AF4BCB5519B4CDBB00658CD8 /* RWTWeatherListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4BCB4A19B4CDBB00658CD8 /* RWTWeatherListCell.m */; };
+		AF4BCB5619B4CDBB00658CD8 /* RWTWeatherListController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4BCB4C19B4CDBB00658CD8 /* RWTWeatherListController.m */; };
+		AF4BCB5719B4CDBB00658CD8 /* RWTWeatherListDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4BCB4E19B4CDBB00658CD8 /* RWTWeatherListDataSource.m */; };
+		AF4BCB5819B4CDBB00658CD8 /* RWTWeatherListDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4BCB5019B4CDBB00658CD8 /* RWTWeatherListDelegate.m */; };
+		AF4BCB5919B4CDBB00658CD8 /* RWTWeatherListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4BCB5219B4CDBB00658CD8 /* RWTWeatherListItem.m */; };
+		AF4BCB5A19B4CDBB00658CD8 /* RWTWeatherListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4BCB5419B4CDBB00658CD8 /* RWTWeatherListModel.m */; };
+		AF4BCB6F19B5907700658CD8 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4BCB5D19B5907600658CD8 /* SDImageCache.m */; };
+		AF4BCB7019B5907700658CD8 /* SDWebImageCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4BCB5F19B5907600658CD8 /* SDWebImageCompat.m */; };
+		AF4BCB7119B5907700658CD8 /* SDWebImageDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4BCB6119B5907700658CD8 /* SDWebImageDecoder.m */; };
+		AF4BCB7219B5907700658CD8 /* SDWebImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4BCB6319B5907700658CD8 /* SDWebImageDownloader.m */; };
+		AF4BCB7319B5907700658CD8 /* SDWebImageDownloaderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4BCB6519B5907700658CD8 /* SDWebImageDownloaderOperation.m */; };
+		AF4BCB7419B5907700658CD8 /* SDWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4BCB6719B5907700658CD8 /* SDWebImageManager.m */; };
+		AF4BCB7519B5907700658CD8 /* SDWebImagePrefetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4BCB6A19B5907700658CD8 /* SDWebImagePrefetcher.m */; };
+		AF4BCB7619B5907700658CD8 /* UIButton+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4BCB6C19B5907700658CD8 /* UIButton+WebCache.m */; };
+		AF4BCB7719B5907700658CD8 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = AF4BCB6E19B5907700658CD8 /* UIImageView+WebCache.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +155,38 @@
 		AF4BCB2F19B4B07F00658CD8 /* UIScrollView+SVInfiniteScrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVInfiniteScrolling.m"; sourceTree = "<group>"; };
 		AF4BCB3019B4B07F00658CD8 /* UIScrollView+SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVPullToRefresh.h"; sourceTree = "<group>"; };
 		AF4BCB3119B4B07F00658CD8 /* UIScrollView+SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVPullToRefresh.m"; sourceTree = "<group>"; };
+		AF4BCB3419B4B52700658CD8 /* WeatherListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeatherListCell.xib; sourceTree = "<group>"; };
+		AF4BCB4919B4CDBB00658CD8 /* RWTWeatherListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RWTWeatherListCell.h; sourceTree = "<group>"; };
+		AF4BCB4A19B4CDBB00658CD8 /* RWTWeatherListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RWTWeatherListCell.m; sourceTree = "<group>"; };
+		AF4BCB4B19B4CDBB00658CD8 /* RWTWeatherListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RWTWeatherListController.h; sourceTree = "<group>"; };
+		AF4BCB4C19B4CDBB00658CD8 /* RWTWeatherListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RWTWeatherListController.m; sourceTree = "<group>"; };
+		AF4BCB4D19B4CDBB00658CD8 /* RWTWeatherListDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RWTWeatherListDataSource.h; sourceTree = "<group>"; };
+		AF4BCB4E19B4CDBB00658CD8 /* RWTWeatherListDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RWTWeatherListDataSource.m; sourceTree = "<group>"; };
+		AF4BCB4F19B4CDBB00658CD8 /* RWTWeatherListDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RWTWeatherListDelegate.h; sourceTree = "<group>"; };
+		AF4BCB5019B4CDBB00658CD8 /* RWTWeatherListDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RWTWeatherListDelegate.m; sourceTree = "<group>"; };
+		AF4BCB5119B4CDBB00658CD8 /* RWTWeatherListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RWTWeatherListItem.h; sourceTree = "<group>"; };
+		AF4BCB5219B4CDBB00658CD8 /* RWTWeatherListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RWTWeatherListItem.m; sourceTree = "<group>"; };
+		AF4BCB5319B4CDBB00658CD8 /* RWTWeatherListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RWTWeatherListModel.h; sourceTree = "<group>"; };
+		AF4BCB5419B4CDBB00658CD8 /* RWTWeatherListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RWTWeatherListModel.m; sourceTree = "<group>"; };
+		AF4BCB5C19B5907600658CD8 /* SDImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImageCache.h; sourceTree = "<group>"; };
+		AF4BCB5D19B5907600658CD8 /* SDImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDImageCache.m; sourceTree = "<group>"; };
+		AF4BCB5E19B5907600658CD8 /* SDWebImageCompat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageCompat.h; sourceTree = "<group>"; };
+		AF4BCB5F19B5907600658CD8 /* SDWebImageCompat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageCompat.m; sourceTree = "<group>"; };
+		AF4BCB6019B5907700658CD8 /* SDWebImageDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageDecoder.h; sourceTree = "<group>"; };
+		AF4BCB6119B5907700658CD8 /* SDWebImageDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageDecoder.m; sourceTree = "<group>"; };
+		AF4BCB6219B5907700658CD8 /* SDWebImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageDownloader.h; sourceTree = "<group>"; };
+		AF4BCB6319B5907700658CD8 /* SDWebImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageDownloader.m; sourceTree = "<group>"; };
+		AF4BCB6419B5907700658CD8 /* SDWebImageDownloaderOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageDownloaderOperation.h; sourceTree = "<group>"; };
+		AF4BCB6519B5907700658CD8 /* SDWebImageDownloaderOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageDownloaderOperation.m; sourceTree = "<group>"; };
+		AF4BCB6619B5907700658CD8 /* SDWebImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageManager.h; sourceTree = "<group>"; };
+		AF4BCB6719B5907700658CD8 /* SDWebImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageManager.m; sourceTree = "<group>"; };
+		AF4BCB6819B5907700658CD8 /* SDWebImageOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageOperation.h; sourceTree = "<group>"; };
+		AF4BCB6919B5907700658CD8 /* SDWebImagePrefetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImagePrefetcher.h; sourceTree = "<group>"; };
+		AF4BCB6A19B5907700658CD8 /* SDWebImagePrefetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImagePrefetcher.m; sourceTree = "<group>"; };
+		AF4BCB6B19B5907700658CD8 /* UIButton+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+WebCache.h"; sourceTree = "<group>"; };
+		AF4BCB6C19B5907700658CD8 /* UIButton+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+WebCache.m"; sourceTree = "<group>"; };
+		AF4BCB6D19B5907700658CD8 /* UIImageView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+WebCache.h"; sourceTree = "<group>"; };
+		AF4BCB6E19B5907700658CD8 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +246,19 @@
 		AF4BCA9119B4AE7B00658CD8 /* TXAPDemo */ = {
 			isa = PBXGroup;
 			children = (
+				AF4BCB5B19B5907600658CD8 /* SDWebImage */,
+				AF4BCB4919B4CDBB00658CD8 /* RWTWeatherListCell.h */,
+				AF4BCB4A19B4CDBB00658CD8 /* RWTWeatherListCell.m */,
+				AF4BCB4B19B4CDBB00658CD8 /* RWTWeatherListController.h */,
+				AF4BCB4C19B4CDBB00658CD8 /* RWTWeatherListController.m */,
+				AF4BCB4D19B4CDBB00658CD8 /* RWTWeatherListDataSource.h */,
+				AF4BCB4E19B4CDBB00658CD8 /* RWTWeatherListDataSource.m */,
+				AF4BCB4F19B4CDBB00658CD8 /* RWTWeatherListDelegate.h */,
+				AF4BCB5019B4CDBB00658CD8 /* RWTWeatherListDelegate.m */,
+				AF4BCB5119B4CDBB00658CD8 /* RWTWeatherListItem.h */,
+				AF4BCB5219B4CDBB00658CD8 /* RWTWeatherListItem.m */,
+				AF4BCB5319B4CDBB00658CD8 /* RWTWeatherListModel.h */,
+				AF4BCB5419B4CDBB00658CD8 /* RWTWeatherListModel.m */,
 				AF4BCB2C19B4B07F00658CD8 /* SVPullToRefresh */,
 				AF4BCB1219B4B04300658CD8 /* AFNetworking */,
 				AF4BCAC019B4AE9100658CD8 /* SBMVC */,
@@ -208,6 +269,7 @@
 				AF4BCAA119B4AE7B00658CD8 /* ViewController.m */,
 				AF4BCAA319B4AE7B00658CD8 /* Images.xcassets */,
 				AF4BCA9219B4AE7B00658CD8 /* Supporting Files */,
+				AF4BCB3419B4B52700658CD8 /* WeatherListCell.xib */,
 			);
 			path = TXAPDemo;
 			sourceTree = "<group>";
@@ -392,6 +454,32 @@
 			path = SVPullToRefresh;
 			sourceTree = "<group>";
 		};
+		AF4BCB5B19B5907600658CD8 /* SDWebImage */ = {
+			isa = PBXGroup;
+			children = (
+				AF4BCB5C19B5907600658CD8 /* SDImageCache.h */,
+				AF4BCB5D19B5907600658CD8 /* SDImageCache.m */,
+				AF4BCB5E19B5907600658CD8 /* SDWebImageCompat.h */,
+				AF4BCB5F19B5907600658CD8 /* SDWebImageCompat.m */,
+				AF4BCB6019B5907700658CD8 /* SDWebImageDecoder.h */,
+				AF4BCB6119B5907700658CD8 /* SDWebImageDecoder.m */,
+				AF4BCB6219B5907700658CD8 /* SDWebImageDownloader.h */,
+				AF4BCB6319B5907700658CD8 /* SDWebImageDownloader.m */,
+				AF4BCB6419B5907700658CD8 /* SDWebImageDownloaderOperation.h */,
+				AF4BCB6519B5907700658CD8 /* SDWebImageDownloaderOperation.m */,
+				AF4BCB6619B5907700658CD8 /* SDWebImageManager.h */,
+				AF4BCB6719B5907700658CD8 /* SDWebImageManager.m */,
+				AF4BCB6819B5907700658CD8 /* SDWebImageOperation.h */,
+				AF4BCB6919B5907700658CD8 /* SDWebImagePrefetcher.h */,
+				AF4BCB6A19B5907700658CD8 /* SDWebImagePrefetcher.m */,
+				AF4BCB6B19B5907700658CD8 /* UIButton+WebCache.h */,
+				AF4BCB6C19B5907700658CD8 /* UIButton+WebCache.m */,
+				AF4BCB6D19B5907700658CD8 /* UIImageView+WebCache.h */,
+				AF4BCB6E19B5907700658CD8 /* UIImageView+WebCache.m */,
+			);
+			path = SDWebImage;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -470,6 +558,7 @@
 			files = (
 				AF4BCAA419B4AE7B00658CD8 /* Images.xcassets in Resources */,
 				AF4BCA9619B4AE7B00658CD8 /* InfoPlist.strings in Resources */,
+				AF4BCB3519B4B52700658CD8 /* WeatherListCell.xib in Resources */,
 				AF4BCA9F19B4AE7B00658CD8 /* Main.storyboard in Resources */,
 				AF4BCB1119B4AE9100658CD8 /* TBCitySBErrorFile.plist in Resources */,
 			);
@@ -492,26 +581,41 @@
 			files = (
 				AF4BCAFE19B4AE9100658CD8 /* TBCitySBTableViewLoadingCell.m in Sources */,
 				AF4BCB3219B4B07F00658CD8 /* UIScrollView+SVInfiniteScrolling.m in Sources */,
+				AF4BCB5A19B4CDBB00658CD8 /* RWTWeatherListModel.m in Sources */,
+				AF4BCB5619B4CDBB00658CD8 /* RWTWeatherListController.m in Sources */,
 				AF4BCB0219B4AE9100658CD8 /* TBCitySBTableViewDelegate.m in Sources */,
+				AF4BCB5719B4CDBB00658CD8 /* RWTWeatherListDataSource.m in Sources */,
+				AF4BCB5819B4CDBB00658CD8 /* RWTWeatherListDelegate.m in Sources */,
 				AF4BCAFD19B4AE9100658CD8 /* TBCitySBTableViewErrorCell.m in Sources */,
 				AF4BCB0019B4AE9100658CD8 /* TBCitySBViewController.m in Sources */,
+				AF4BCB5519B4CDBB00658CD8 /* RWTWeatherListCell.m in Sources */,
 				AF4BCB2A19B4B04300658CD8 /* AFURLConnectionOperation.m in Sources */,
 				AF4BCB0819B4AE9100658CD8 /* TBCitySBModel.m in Sources */,
 				AF4BCB2419B4B04300658CD8 /* AFHTTPClient.m in Sources */,
+				AF4BCB7119B5907700658CD8 /* SDWebImageDecoder.m in Sources */,
 				AF4BCB0E19B4AE9100658CD8 /* TBCitySBTableViewFactory.m in Sources */,
+				AF4BCB7419B5907700658CD8 /* SDWebImageManager.m in Sources */,
 				AF4BCAA219B4AE7B00658CD8 /* ViewController.m in Sources */,
 				AF4BCB0F19B4AE9100658CD8 /* TBCitySBAFRequest.m in Sources */,
 				AF4BCAFF19B4AE9100658CD8 /* TBCitySBTableViewController.m in Sources */,
 				AF4BCB2519B4B04300658CD8 /* AFHTTPRequestOperation.m in Sources */,
+				AF4BCB6F19B5907700658CD8 /* SDImageCache.m in Sources */,
 				AF4BCB0519B4AE9100658CD8 /* TBCitySBTableViewItem.m in Sources */,
+				AF4BCB7319B5907700658CD8 /* SDWebImageDownloaderOperation.m in Sources */,
 				AF4BCB3319B4B07F00658CD8 /* UIScrollView+SVPullToRefresh.m in Sources */,
 				AF4BCB2919B4B04300658CD8 /* AFPropertyListRequestOperation.m in Sources */,
+				AF4BCB7619B5907700658CD8 /* UIButton+WebCache.m in Sources */,
 				AF4BCB2619B4B04300658CD8 /* AFImageRequestOperation.m in Sources */,
+				AF4BCB7219B5907700658CD8 /* SDWebImageDownloader.m in Sources */,
 				AF4BCAFB19B4AE9100658CD8 /* TBCitySBTableViewCell.m in Sources */,
 				AF4BCB2719B4B04300658CD8 /* AFJSONRequestOperation.m in Sources */,
 				AF4BCB0419B4AE9100658CD8 /* TBCitySBItem.m in Sources */,
 				AF4BCB0119B4AE9100658CD8 /* TBCitySBTableViewDataSource.m in Sources */,
+				AF4BCB7719B5907700658CD8 /* UIImageView+WebCache.m in Sources */,
 				AF4BCB0619B4AE9100658CD8 /* TBCitySBItemList.m in Sources */,
+				AF4BCB5919B4CDBB00658CD8 /* RWTWeatherListItem.m in Sources */,
+				AF4BCB7519B5907700658CD8 /* SDWebImagePrefetcher.m in Sources */,
+				AF4BCB7019B5907700658CD8 /* SDWebImageCompat.m in Sources */,
 				AF4BCB2B19B4B04300658CD8 /* AFXMLRequestOperation.m in Sources */,
 				AF4BCAFC19B4AE9100658CD8 /* TBCitySBTableViewCustomizedCell.m in Sources */,
 				AF4BCA9C19B4AE7B00658CD8 /* AppDelegate.m in Sources */,

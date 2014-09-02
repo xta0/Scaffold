@@ -28,6 +28,8 @@
 @synthesize showLogin = _showLogin;
 @synthesize apiCacheTimeOutSeconds = _apiCacheTimeOutSeconds;
 @synthesize delegate = _delegate;
+@synthesize responseObject = _responseObject;
+@synthesize responseString = _responseString;
 
 
 - (void)dealloc {
@@ -39,6 +41,18 @@
 {
     [_dict addEntriesFromDictionary:aParams];
     
+}
+
+- (void)addBodyData:(NSDictionary *)aData forKey:(NSString *)key
+{
+    [aData enumerateKeysAndObjectsUsingBlock:^(id name, id obj, BOOL *stop) {
+        
+        NSAssert([obj isKindOfClass:[NSData class]], @"POST Data must be NSData class");
+        
+        //[self.mtopRequest addData:obj withFileName:name forKey:key];
+        //todo
+        
+    }];
 }
 - (void)initRequestWithBaseURL:(NSString *)url
 {
@@ -59,14 +73,14 @@
     
     NSMutableURLRequest* request = [_afClicent requestWithMethod:@"GET" path:_url parameters:_dict];
     request.timeoutInterval = 5.0f;
-    AFHTTPRequestOperation* op = [_afClicent HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSDictionary* responseJSON = nil;
-        
-        if ([responseObject isKindOfClass:[NSData class]]) {
+    AFHTTPRequestOperation* op = [_afClicent HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseData) {
+  
+        if ([responseData isKindOfClass:[NSData class]]) {
             
             NSError* error = nil;
-            responseJSON = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:&error];
+            
+            _responseString = [[NSString alloc]initWithData:responseData encoding:NSUTF8StringEncoding];
+            _responseObject = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&error];
             
             if (error) {
                 
@@ -74,7 +88,7 @@
             }
             else
             {
-                [self sendSucceedCallback:responseJSON];
+                [self sendSucceedCallback:_responseObject];
             }
         }
         else

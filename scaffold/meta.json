@@ -1,18 +1,10 @@
 {
 "model":[
 	{
-		"name":"TBCityMainCardPageModel",
-		"class":"TBCitySBModel",
-		"api":"mtop.taobao.mainpagecard",
-		"v":"2.0",
-		"in":["lat","lng","type"],
-		"out":[{"result":"NSDictionary"},{"open":"NSString"},{"cities":"NSArray"}]
-	},
-	{
-		"name":"TBCityMainBannerPageModel",
+		"name":"RWTWeatherListModel",
 		"class":"TBCitySBListModel",
-		"api":"mtop.taobao.mainpagebanner",
-		"v":"2.0",
+		"api":"http://www.raywenderlich.com/demos/weather_sample/weather.php?format=json",
+		"v":" ",
 		"in":[],
 		"out":[]
 	}
@@ -20,30 +12,27 @@
 	
 "item":[
 	{
-		"name":"TBCityMainPageCardItem",
-		"class":"TBCitySBItem",
-		"response":"./input.json"
-	},
-	{
-		"name":"TBCityMainPageBannerItem",
-		"class":"TBCitySBItem",
+		"name":"RWTWeatherListItem",
+		"class":"TBCitySBTableViewItem",
 		"response":"./input.json"
 	}
 ],
 
 "controller":[
 	{
-		"name":"TBCityMainPageController",
+		"name":"RWTWeatherListController",
 		"class":"TBCitySBTableViewController",
-		"protocols":["UITableViewDelegate","UITableViewDataSource"],
-		"models":[{"name":"cardModel","class":"TBCityMainCardPageModel"},{"name":"bannerModel","class":"TBCityMainBannerPageModel"}],
-		"datasource":{"name":"ds","class":"TBCityMainPageDataSource","cell":"TBCityMainPageCardCell"},
-		"delegate":{"name":"dl","class":"TBCityMainPageDelegate"}
+		"protocols":[],
+		"models":[{"name":"weatherListModel","class":"RWTWeatherListModel"}],
+		"datasource":{"name":"ds","class":"RWTWeatherListDataSource","cell":"RWTWeatherListCell"},
+		"delegate":{"name":"dl","class":"RWTWeatherListDelegate"}
 	}
 ],
 
-"view":{"xib":"./xib.xml"},
+"view":{"xib":"./WeatherListCell.xml"},
 
-"author":"moxin.xt"
+"author":"moxin.xt",
+
+"folder":"weather"
 
 }

@@ -7,7 +7,9 @@ module MAPPINGS
                "label" => "UILabel",
                "button" => "UIButton", 
                "imageView" => "UIImageView",
-               "tableViewCell" => "UITableViewCell"} 
+               "tableViewCell" => "TBCitySBTableViewCell"} 
+               
+
   
   #xib's button type <=> objc
   OBJC_BTN_TYPE = {"contactAdd" => "UIButtonTypeContactAdd",
@@ -20,6 +22,8 @@ module MAPPINGS
   OBJC_TEXT_ALIGNMENT = {"center" => "NSTextAlignmentCenter",
                          "left" => "NSTextAlignmentLeft", 
                          "right" => "NSTextAlignmentRight"}
+    
+                         
   
 
   #COLOR
@@ -31,10 +35,16 @@ module MAPPINGS
     return "[UIColor colorWithWhite:#{w} alpha:#{a}]"
   end
   
+  def MAPPINGS.colorWithCocoaColor(c)
+    return "[UIColor #{c}]"
+  end
+  
   def MAPPINGS.colorWithObject(c)
     
-    if(c["white"] != nil)
+    if(c["white"])
       return MAPPINGS.colorWithWhiteAndAlpha(c["white"],c["alpha"])
+    elsif(c["cocoaTouchSystemColor"])
+      return MAPPINGS.colorWithCocoaColor(c["cocoaTouchSystemColor"])
     elsif(c["red"] && c["green"] && c["blue"] && c["alpha"])
       return MAPPINGS.colorWithRGBA(c["red"],c["green"],c["blue"],c["alpha"])
     else

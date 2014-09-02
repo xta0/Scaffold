@@ -47,7 +47,7 @@ def createModels(name,clz,api,v,ins,outs,author)
     h.puts(str)
     
     #import
-    str = "#import \"#{name}.h \" \n\n"
+    str = "#import \"#{name}.h\"\n\n"
     h.puts str
     
     #@implement
@@ -77,6 +77,11 @@ def createModels(name,clz,api,v,ins,outs,author)
     #parse response
     str = "- (NSArray*)parseResponse:(id)JSON error:(NSError *__autoreleasing *)error{\n\n    return nil; \n\n}\n"
     h.puts str
+    
+    #@end
+    str = "@end\n\n"
+    h.puts str
+    
   }
 
   

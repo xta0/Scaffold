@@ -80,17 +80,21 @@ def createControllers(name,clz,pros,models,datasource,delegate,author)
       
       _clz = model["class"]
       _name = model["name"]
-      str += "-(#{_clz}* )#{_name}{\n\n if(!_#{_name}) {\n      _#{_name} = [#{_clz} new];\n      _#{_name}.key = @\"__#{_clz}__\";\n   }\n   return _#{name};\n}\n\n"  
+      str += "-(#{_clz}* )#{_name}{\n\n if(!_#{_name}) {\n      _#{_name} = [#{_clz} new];\n      _#{_name}.key = @\"__#{_clz}__\";\n   }\n   return _#{_name};\n}\n\n"  
     }
     h.puts str
     
     if(datasource)
-      str = "- (#{datasource["name"]}* )ds{\n\n  if (!_ds) {\n      _ds = [#{datasource["name"]} new];\n   }\n   return _ds;\n}\n\n"
+      _name = datasource["name"]
+      _clz  = datasource["class"]
+      str = "- (#{_clz}* )#{_name}{\n\n  if (!_#{_name}) {\n      _ds = [#{_clz} new];\n   }\n   return _#{_name};\n}\n\n"
       h.puts str
     end
     
     if(delegate)
-      str = "- (#{delegate["name"]}* )dl{\n\n  if (!_dl) {\n      _dl = [#{delegate["name"]} new];\n   }\n   return _dl;\n}\n\n"
+      _name = delegate["name"]
+      _clz  = delegate["class"]
+      str = "- (#{_clz}* )#{_name}{\n\n  if (!_#{_name}) {\n      _dl = [#{_clz} new];\n   }\n   return _#{_name};\n}\n\n"
       h.puts str
     end
     
@@ -214,8 +218,8 @@ def createDataSource(name,clz,cell,author)
   
   File.open("./#{clz}.m","w"){ |h|
   
-    str = "#import \"#{clz}.h\" \n\n"
-    str += "#import #{cell}.h \n\n"
+    str = "#import \"#{clz}.h\"\n\n"
+    str += "#import \"#{cell}.h\"\n\n"
     h.puts str
   
     str = "@implementation #{clz} \n\n"
@@ -265,7 +269,7 @@ def createDelegate(name,clz,author)
   
   File.open("./#{clz}.m","w"){ |h|
   
-    str = "#import \"#{clz}.h\" \n\n"
+    str = "#import \"#{clz}.h\"\n\n"
     h.puts str
     
     str = "@implementation #{clz} \n\n"

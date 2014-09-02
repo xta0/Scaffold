@@ -27,12 +27,11 @@ class XibParser
 
     ##1,find objects
     root_objs = @doc.xpath('//objects/*')
-   
     root_objs.each do |o|
 
       if( o.name == 'view' || o.name == 'tableViewCell' )
 
-        tmp = Array.new
+        tmp = []
         subviews = nil
         
         if o.name == 'view'
@@ -42,34 +41,34 @@ class XibParser
         if o.name == 'tableViewCell'
           subviews = o.xpath("tableViewCellContentView/subviews/*")
         end
-
+        
+ 
         #get subviews class
         if (subviews)
-          subviews.each do |v| ## v => Nokogiri::XML::Element
+          
+            subviews.each{|v| ## v => Nokogiri::XML::Element
  
-            objc_clz  = v["customClass"] ? v["customClass"] : MAPPINGS::OBJC_CLASS[v.name]
-            objc_name = v.at_xpath('accessibility')["label"] 
-            obj = UIKitFactory.UIKitObj(v,objc_name,objc_clz)
+              objc_clz  = v["customClass"] ? v["customClass"] : MAPPINGS::OBJC_CLASS[v.name]
+              objc_name = v.at_xpath('accessibility')["label"] 
+              obj = UIKitFactory.UIKitObj(v,objc_name,objc_clz)
           
-            ##custom import list
-            customClass = v["customClass"]
-            if customClass
-              obj.customClz = true
-            end
-    
-            tmp << obj
+              ##custom import list
+              customClass = v["customClass"]
+              obj.customClz = true if(customClass)
+              tmp.push(obj)
           
-          end ##end of subviews.each
-        
-          #background color
-          color = o.at_xpath("color")
-          bkColor = nil
-          if color && color["key"] == "backgroundColor"
-            bkColor = MAPPINGS.colorWithObject(color)
-          end
-        
-          @view_hash[o["customClass"]] = {"clz"=>o.name,"bkcolor"=> bkColor , "subviews" => tmp}
+            } ##end of subviews.each
         end #end of if (subviews)
+        
+        #background color
+        color = o.at_xpath("color")
+        bkColor = MAPPINGS.colorWithObject(color) if(color && color["key"] == "backgroundColor")
+          
+        #binding data
+        data = o.at_xpath("bind")
+        data_clz = data["class"]
+        data_name = data["name"]
+        @view_hash[o["customClass"]] = {"clz"=>o.name,"bkcolor"=> bkColor , "subviews" => tmp, "data" => {data_clz => data_name}}
         
       end ##end of if      
     

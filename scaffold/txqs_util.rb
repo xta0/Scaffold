@@ -37,7 +37,7 @@ def headerFileContent(imports,name,clz,properties,methods,protocols)
   str = "\n\n"
   
   #imports
-  imports.each{|i| str += "#import \"#{i}\"\n"}
+  imports.each{|i| str += "@class #{i};\n"}
   
   str += "\n"
   
