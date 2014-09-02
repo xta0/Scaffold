@@ -84,6 +84,7 @@ def createItems(name,clz,path,author)
 end
 
 
-createItems(g_name,g_clz,g_path,g_author)
-
+if g_name & g_clz & g_path
+  createItems(g_name,g_clz,g_path,g_author)
+end
 

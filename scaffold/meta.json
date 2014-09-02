@@ -31,8 +31,6 @@
 
 "view":{"xib":"./WeatherListCell.xml"},
 
-"author":"moxin.xt",
-
-"folder":"weather"
+"author":"moxin.xt"
 
 }

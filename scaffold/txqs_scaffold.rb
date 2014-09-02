@@ -25,6 +25,7 @@ end
 
 #author
 author = response["author"]
+puts "author : #{author}"
 
 
 #create controller

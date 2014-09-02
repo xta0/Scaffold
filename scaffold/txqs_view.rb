@@ -122,4 +122,6 @@ def createViews(path,author)
   
 end
 
-createViews(g_path,g_author)
+if g_path & g_author
+  createViews(g_path,g_author)
+end
