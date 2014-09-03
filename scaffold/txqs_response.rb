@@ -2,6 +2,7 @@ require 'json'
 require 'pp'
 require './txqs_util.rb'
 
+Dir.exist?("./out/item") ? $g_src_item_path = "/out/item" : ""
 
 g_name = ARGV[0]
 g_clz  = ARGV[1]
@@ -9,7 +10,7 @@ g_path = ARGV[2]
 g_author = ARGV[3]
 
 def createItems(name,clz,path,author)
-  
+
   if(not path)
     path = "./input.json"
   end
@@ -34,12 +35,12 @@ def createItems(name,clz,path,author)
       propList.push("@property(nonatomic,strong)#{c} *#{k}")
     }
     
-    if File.exist?("./#{name}.h")
-      File.delete("./#{name}.h")
+    if File.exist?(".#{$g_src_item_path}/#{name}.h")
+      File.delete(".#{$g_src_item_path}/#{name}.h")
     end
 
     #header
-    File.open("./#{name}.h","w"){ |h|
+    File.open(".#{$g_src_item_path}/#{name}.h","w"){ |h|
 
       str = commentsOfFile("h","#{name}","#{author}")
       h.puts(str)
@@ -49,10 +50,10 @@ def createItems(name,clz,path,author)
     }
 
     #body
-    if File.exist?("./#{name}.m")
-      File.delete("./#{name}.m")
+    if File.exist?(".#{$g_src_item_path}/#{name}.m")
+      File.delete(".#{$g_src_item_path}/#{name}.m")
     end
-    File.open("./#{name}.m","w"){|m|
+    File.open(".#{$g_src_item_path}/#{name}.m","w"){|m|
 
       str = commentsOfFile("m","#{name}","#{author}")
       m.puts(str)
@@ -84,7 +85,7 @@ def createItems(name,clz,path,author)
 end
 
 
-if g_name & g_clz & g_path
+if g_name && g_clz && g_path
   createItems(g_name,g_clz,g_path,g_author)
 end
 

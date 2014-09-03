@@ -1,10 +1,11 @@
 require './txqs_parser.rb'
 require './txqs_mappings.rb'
 require './txqs_util.rb'
-
+require 'pp'
 
 g_path = ARGV[0]
 g_author = ARGV[1]
+Dir.exist?("./out/view") ? $g_src_view_path = "/out/view" : ""
 
 
 def createViews(path,author)
@@ -45,11 +46,11 @@ def createViews(path,author)
  
     
     #header
-    if File.exist?("./#{k}.h")
-      File.delete("./#{k}.h")
+    if File.exist?(".#{$g_src_view_path}/#{k}.h")
+      File.delete(".#{$g_src_view_path}/#{k}.h")
     end
 
-    File.open("./#{k}.h","w"){|f|
+    File.open(".#{$g_src_view_path}/#{k}.h","w"){|f|
       #注释
       str = commentsOfFile("h","#{k}",author)
       f.puts str
@@ -60,11 +61,11 @@ def createViews(path,author)
     }
 
     #body
-    if File.exist?("./#{k}.m")
-      File.delete("./#{k}.m")
+    if File.exist?(".#{$g_src_view_path}/#{k}.m")
+      File.delete(".#{$g_src_view_path}/#{k}.m")
     end
 
-    File.open("./#{k}.m","w"){|f|
+    File.open(".#{$g_src_view_path}/#{k}.m","w"){|f|
       
       f.puts "\n#import \"#{k}.h\" \n"
       str = ""
@@ -122,6 +123,6 @@ def createViews(path,author)
   
 end
 
-if g_path & g_author
+if g_path && g_author
   createViews(g_path,g_author)
 end

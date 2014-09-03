@@ -2,6 +2,7 @@ require "json"
 require "pp"
 require "./txqs_util.rb"
 
+Dir.exist?("./out/model") ? $g_src_model_path = "/out/model" : ""
 
 def createModels(name,clz,api,v,ins,outs,author)
 
@@ -23,25 +24,25 @@ def createModels(name,clz,api,v,ins,outs,author)
 
 
   #header
-  if File.exist?("./#{name}.h")
-    File.delete("./#{name}.h")
+  if File.exist?(".#{$g_src_model_path}/#{name}.h")
+    File.delete(".#{$g_src_model_path}/#{name}.h")
   end
 
-  File.open("./#{name}.h","w"){ |h|
+  File.open(".#{$g_src_model_path}/#{name}.h","w"){ |h|
 
     str = commentsOfFile("h","#{name}","#{author}")
     h.puts(str)
 
-    str = headerFileContent(["#{clz}.h"],name,clz,prop_ins+prop_outs,[],[])
+    str = headerFileContent(["#{clz}"],name,clz,prop_ins+prop_outs,[],[])
     h.puts(str)
   }
   
   #body
-  if File.exist?("./#{name}.m")
-    File.delete("./#{name}.m")
+  if File.exist?(".#{$g_src_model_path}/#{name}.m")
+    File.delete(".#{$g_src_model_path}/#{name}.m")
   end
   
-  File.open("./#{name}.m","w"){ |h|
+  File.open(".#{$g_src_model_path}/#{name}.m","w"){ |h|
     
     str = commentsOfFile("m","#{name}","#{author}")
     h.puts(str)

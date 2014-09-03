@@ -1,9 +1,9 @@
 {
 "model":[
 	{
-		"name":"RWTWeatherListModel",
-		"class":"TBCitySBListModel",
-		"api":"http://www.raywenderlich.com/demos/weather_sample/weather.php?format=json",
+		"name":"",
+		"class":"",
+		"api":"",
 		"v":" ",
 		"in":[],
 		"out":[]
@@ -12,25 +12,28 @@
 	
 "item":[
 	{
-		"name":"RWTWeatherListItem",
-		"class":"TBCitySBTableViewItem",
-		"response":"./input.json"
+		"name":"",
+		"class":"",
+		"response":""
 	}
 ],
 
 "controller":[
 	{
-		"name":"RWTWeatherListController",
-		"class":"TBCitySBTableViewController",
+		"name":"",
+		"class":"",
 		"protocols":[],
-		"models":[{"name":"weatherListModel","class":"RWTWeatherListModel"}],
-		"datasource":{"name":"ds","class":"RWTWeatherListDataSource","cell":"RWTWeatherListCell"},
-		"delegate":{"name":"dl","class":"RWTWeatherListDelegate"}
+		"models":[{"name":"","class":""}],
+		"datasource":{"name":"","class":"","cell":""},
+		"delegate":{"name":"","class":""},
+		"logic":{"class":""}
 	}
 ],
 
-"view":{"xib":"./WeatherListCell.xml"},
+"view":{"xib":""},
 
-"author":"moxin.xt"
+"author":"",
+
+"path":"./"
 
 }

@@ -42,14 +42,18 @@ class XibParser
           subviews = o.xpath("tableViewCellContentView/subviews/*")
         end
         
- 
+        pp "clz:#{o.name}"
+        pp "name:#{o["customClass"]}"
+
         #get subviews class
         if (subviews)
           
             subviews.each{|v| ## v => Nokogiri::XML::Element
- 
+              
               objc_clz  = v["customClass"] ? v["customClass"] : MAPPINGS::OBJC_CLASS[v.name]
               objc_name = v.at_xpath('accessibility')["label"] 
+              
+              pp "{#{objc_clz}=>#{objc_name}}"
               obj = UIKitFactory.UIKitObj(v,objc_name,objc_clz)
           
               ##custom import list
@@ -66,8 +70,8 @@ class XibParser
           
         #binding data
         data = o.at_xpath("bind")
-        data_clz = data["class"]
-        data_name = data["name"]
+        data_clz = data["class"] if(data)
+        data_name = data["name"] if(data)
         @view_hash[o["customClass"]] = {"clz"=>o.name,"bkcolor"=> bkColor , "subviews" => tmp, "data" => {data_clz => data_name}}
         
       end ##end of if      

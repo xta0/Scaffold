@@ -1,28 +1,32 @@
 require "./txqs_util.rb"
 
+Dir.exist?("./out/controller") ? $g_src_ctrlr_path = "/out/controller" : ""
+Dir.exist?("./out/delegate") ? $g_src_dl_path = "/out/delegate" : ""
+Dir.exist?("./out/datasource") ? $g_src_ds_path = "/out/datasource" : ""
+Dir.exist?("./out/logic") ? $g_src_logic_path = "/out/logic" : ""
 
-def createControllers(name,clz,pros,models,datasource,delegate,author)
+def createControllers(name,clz,pros,models,datasource,delegate,logic,author)
 
   #header
-  if File.exist?("./#{name}.h")
-    File.delete("./#{name}.h")
+  if File.exist?(".#{$g_src_ctrlr_path}/#{name}.h")
+    File.delete(".#{$g_src_ctrlr_path}/#{name}.h")
   end
 
-  File.open("./#{name}.h","w"){ |h|
+  File.open(".#{$g_src_ctrlr_path}/#{name}.h","w"){ |h|
 
     str = commentsOfFile("h","#{name}","#{author}")
     h.puts(str)
 
-    str = headerFileContent(["#{clz}.h"],name,clz,[],[],[])
+    str = headerFileContent(["#{clz}"],name,clz,[],[],[])
     h.puts(str)
   }
   
   #body
-  if File.exist?("./#{name}.m")
-    File.delete("./#{name}.m")
+  if File.exist?(".#{$g_src_ctrlr_path}/#{name}.m")
+    File.delete(".#{$g_src_ctrlr_path}/#{name}.m")
   end
   
-  File.open("./#{name}.m","w"){ |h|
+  File.open(".#{$g_src_ctrlr_path}/#{name}.m","w"){ |h|
     
     str = commentsOfFile("m","#{name}","#{author}")
     h.puts(str)
@@ -33,13 +37,10 @@ def createControllers(name,clz,pros,models,datasource,delegate,author)
       _clz = model["class"]
       str += "#import \"#{_clz}.h\" \n"
     }
-    if(datasource)
-      str += "#import \"#{datasource["class"]}.h\" \n"
-    end
-    
-    if(delegate)
-      str += "#import \"#{delegate["class"]}.h\" \n"
-    end
+  
+    str += "#import \"#{datasource["class"]}.h\" \n" if(datasource)
+    str += "#import \"#{delegate["class"]}.h\" \n" if(delegate)
+    str += "#import \"#{logic["class"]}.h\"  \n" if(logic)
     h.puts str+"\n"
     
     
@@ -101,6 +102,13 @@ def createControllers(name,clz,pros,models,datasource,delegate,author)
     #life cycle
     str = "//////////////////////////////////////////////////////////// \n#pragma mark - life cycle \n\n"  
     h.puts str
+    
+    #init
+    if(logic)
+      _clz = logic["class"]
+      str = "-(id)init{\n\n   self = [super init];\n\n    if (self) {\n\n     self.logic = [#{_clz} new];\n\n   }\n\n   return self;\n\n}\n\n"
+      h.puts str
+    end
     
     #loadview
     str = "- (void)loadView{ \n\n    [super loadView]; \n\n\n\n}\n\n"
@@ -191,6 +199,11 @@ def createControllers(name,clz,pros,models,datasource,delegate,author)
   if(delegate)
     createDelegate(delegate["name"],delegate["class"],author)
   end
+  
+  #create logic
+  if(logic)
+    createLogic(logic["class"],author)
+  end
 
 end
 
@@ -198,25 +211,25 @@ end
 def createDataSource(name,clz,cell,author)
   
   #header
-  if File.exist?("./#{clz}.h")
-    File.delete("./#{clz}.h")
+  if File.exist?(".#{$g_src_ds_path}/#{clz}.h")
+    File.delete(".#{$g_src_ds_path}/#{clz}.h")
   end
 
-  File.open("./#{clz}.h","w"){ |h|
+  File.open(".#{$g_src_ds_path}/#{clz}.h","w"){ |h|
 
     str = commentsOfFile("h","#{clz}","#{author}")
     h.puts(str)
 
-    str = headerFileContent(["TBCitySBTableViewDataSource.h"],clz,"TBCitySBTableViewDataSource",[],[],[])
+    str = headerFileContent(["TBCitySBTableViewDataSource"],clz,"TBCitySBTableViewDataSource",[],[],[])
     h.puts(str)
   }
   
   #body
-  if File.exist?("./#{clz}.m")
-    File.delete("./#{clz}.m")
+  if File.exist?(".#{$g_src_ds_path}/#{clz}.m")
+    File.delete(".#{$g_src_ds_path}/#{clz}.m")
   end
   
-  File.open("./#{clz}.m","w"){ |h|
+  File.open(".#{$g_src_ds_path}/#{clz}.m","w"){ |h|
   
     str = "#import \"#{clz}.h\"\n\n"
     str += "#import \"#{cell}.h\"\n\n"
@@ -249,25 +262,25 @@ end
 def createDelegate(name,clz,author)
   
   #header
-  if File.exist?("./#{clz}.h")
-    File.delete("./#{clz}.h")
+  if File.exist?(".#{$g_src_dl_path}/#{clz}.h")
+    File.delete(".#{$g_src_dl_path}/#{clz}.h")
   end
 
-  File.open("./#{clz}.h","w"){ |h|
+  File.open(".#{$g_src_dl_path}/#{clz}.h","w"){ |h|
 
     str = commentsOfFile("h","#{clz}","#{author}")
     h.puts(str)
 
-    str = headerFileContent(["TBCitySBTableViewDelegate.h"],clz,"TBCitySBTableViewDelegate",[],[],[])
+    str = headerFileContent(["TBCitySBTableViewDelegate"],clz,"TBCitySBTableViewDelegate",[],[],[])
     h.puts(str)
   }
   
   #body
-  if File.exist?("./#{clz}.m")
-    File.delete("./#{clz}.m")
+  if File.exist?(".#{$g_src_dl_path}/#{clz}.m")
+    File.delete(".#{$g_src_dl_path}/#{clz}.m")
   end
   
-  File.open("./#{clz}.m","w"){ |h|
+  File.open(".#{$g_src_dl_path}/#{clz}.m","w"){ |h|
   
     str = "#import \"#{clz}.h\"\n\n"
     h.puts str
@@ -275,6 +288,49 @@ def createDelegate(name,clz,author)
     str = "@implementation #{clz} \n\n"
     h.puts str
       
+    str = "@end \n\n"
+    h.puts str
+  }
+  
+end
+
+def createLogic(clz,author)
+  
+  #header
+  if File.exist?(".#{$g_src_logic_path}/#{clz}.h")
+    File.delete(".#{$g_src_logic_path}/#{clz}.h")
+  end
+
+  File.open(".#{$g_src_logic_path}/#{clz}.h","w"){ |h|
+
+    str = commentsOfFile("h","#{clz}","#{author}")
+    h.puts(str)
+
+    str = headerFileContent(["TBCitySBBusinessLogic"],clz,"TBCitySBBusinessLogic",[],[],[])
+    h.puts(str)
+  }
+  
+  #body
+  if File.exist?(".#{$g_src_logic_path}/#{clz}.m")
+    File.delete(".#{$g_src_logic_path}/#{clz}.m")
+  end
+  
+  File.open(".#{$g_src_logic_path}/#{clz}.m","w"){ |h|
+  
+    str = "#import \"#{clz}.h\"\n\n"
+    h.puts str
+    
+    str = "@implementation #{clz} \n\n"
+    h.puts str
+    
+    str = "-(void)logic_view_did_load{\n\n    //todo\n\n}\n\n"
+    str += "-(void)logic_view_will_appear{\n\n    //todo\n\n}\n\n"
+    str += "-(void)logic_view_did_appear{\n\n    //todo\n\n}\n\n"
+    str += "-(void)logic_view_will_disappear{\n\n    //todo\n\n}\n\n"
+    str += "-(void)logic_view_did_disappear{\n\n    //todo\n\n}\n\n"
+    str += "-(void)dealloc{\n\n    //todo\n\n}\n\n"
+    h.puts str
+    
     str = "@end \n\n"
     h.puts str
   }
