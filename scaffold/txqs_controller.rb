@@ -260,7 +260,7 @@ def createDataSource(name,clz,cell,author)
     
     str = ""
     cell.each{ |c|
-      str += "    if([item isKindOfClass:[#{c["class"]} class]])\n      return [#{c["itemclass"]} class];\n"
+      str += "    if([item isKindOfClass:[#{c["itemclass"]} class]])\n      return [#{c["class"]} class];\n"
     }
     h.puts str
     
