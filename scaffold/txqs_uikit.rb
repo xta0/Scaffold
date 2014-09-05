@@ -213,7 +213,7 @@ class UIView
         
       #text color:
       color = xml_obj.at_xpath("color")
-      @text_color = MAPPINGS.colorWithObject(color)
+      @text_color = color ?  MAPPINGS.colorWithObject(color) : "[UIColor blackColor]"
 
       #breakmode:
       breakmode = xml_obj["lineBreakMode"]

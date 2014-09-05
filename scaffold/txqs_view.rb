@@ -10,6 +10,7 @@ Dir.exist?("./out/view") ? $g_src_view_path = "/out/view" : ""
 
 def createViews(path,author)
 
+  begin
   ##parse xibs
   parser = XibParser.new(path)
   result = parser.parse()
@@ -120,9 +121,12 @@ def createViews(path,author)
       f.puts "\n@end\n"  
     }
   }
-  
+  rescue
+      pp "create view failed!!"
+   end
 end
 
 if g_path && g_author
-  createViews(g_path,g_author)
+  
+    createViews(g_path,g_author)
 end

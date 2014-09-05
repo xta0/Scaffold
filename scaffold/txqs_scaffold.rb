@@ -13,7 +13,7 @@ end
 
 path = ARGV[0]
 
-BEGIN{puts "SCAFFOLDING..."}
+BEGIN{puts "......BEGIN SCAFFOLDING......"}
 
 printSepLine("env: #{RUBY_PLATFORM} ")
 
@@ -45,6 +45,8 @@ if(response["controller"])
     datasource = controller["datasource"]
     delegate = controller["delegate"]
     logic = controller["logic"]
+    
+    puts("\nname:#{name}\nclass:#{clz}\nprotocols:#{pros}\nmodels:#{models}\ndatasource:#{datasource}\ndelegate:#{delegate}\nlogic:#{logic}")
    
     #create files
     createControllers(name,clz,pros,models,datasource,delegate,logic,author)
@@ -64,6 +66,9 @@ if (response["model"])
     v    = model["v"]
     ins  = model["in"]
     outs = model["out"]
+    
+    puts("\nname:#{name}\nclass:#{clz}\napi:#{api}\nv:#{v}\nins:#{ins}\nouts:#{outs}\n")
+    
     #create models
     createModels(name,clz,api,v,ins,outs,author)
   }
@@ -77,7 +82,9 @@ if response["item"]
     name = item["name"]
     clz  = item["class"]
     resp = item["response"]
-  
+ 
+    puts("\nname:#{name}\nclass:#{clz}\njson_path:#{resp}\n")
+    
     #create items
     createItems(name,clz,resp,author)
   }
@@ -87,8 +94,9 @@ end
 if(response["view"])
   printSepLine("create views:")
   xib = response["view"]["xib"]
+  puts("\nxib_path:#{xib}\n")
   createViews(xib,author)
 end
 
+END{puts("......END SCAFFOLDING......")}
 
-END{puts "SUCCEED!"}

@@ -31,7 +31,9 @@ def createItems(name,clz,path,author)
 
     propHash.each{|k,v|
   
-      c = rb2objc(v)
+      c = rb2objc(v)  
+      c = "NSString" if(c == "NSNumber")
+  
       propList.push("@property(nonatomic,strong)#{c} *#{k}")
     }
     

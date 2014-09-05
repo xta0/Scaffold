@@ -9,6 +9,10 @@ def rb2objc(clz)
     ret = "NSArray"
   elsif clzStr == "Hash"
     ret = "NSDictionary"
+  elsif clzStr = "Fixnum"
+    ret = "NSNumber"
+  elsif clzStr = "Float"
+    ret = "NSNumber"
   end
 
 end

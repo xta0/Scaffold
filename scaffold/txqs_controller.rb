@@ -119,7 +119,6 @@ def createControllers(name,clz,pros,models,datasource,delegate,logic,author)
     h.puts str
     
     #tableview
-    puts clz
     if (clz == "TBCitySBTableViewController")
   		s = "    //1,config your tableview\n"
   		s += "    self.tableView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);\n"
@@ -231,8 +230,23 @@ def createDataSource(name,clz,cell,author)
   
   File.open(".#{$g_src_ds_path}/#{clz}.m","w"){ |h|
   
-    str = "#import \"#{clz}.h\"\n\n"
-    str += "#import \"#{cell}.h\"\n\n"
+    itemlist = []
+    celllist = []
+    
+    cell.each{|c|
+      itemlist.push(c["itemclass"])
+      celllist.push(c["class"])    
+    }
+    
+    
+    
+    str = "#import \"#{clz}.h\"\n"
+    celllist.each{|c|
+      str += "#import \"#{c}.h\"\n"
+    }
+    itemlist.each{|i|
+      str += "#import \"#{i}.h\"\n"
+    }
     h.puts str
   
     str = "@implementation #{clz} \n\n"
@@ -241,7 +255,16 @@ def createDataSource(name,clz,cell,author)
     str = "- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{\n\n    //default:\n    return 1; \n\n}\n\n"
     h.puts str
     
-    str = "- (Class)cellClassForItem:(id)item AtIndex:(NSIndexPath *)indexPath{\n\n    //@REQUIRED:\n    return [#{cell} class]; \n\n}\n\n"
+    str = "- (Class)cellClassForItem:(id)item AtIndex:(NSIndexPath *)indexPath{\n\n    //@REQUIRED:\n"  
+    h.puts str
+    
+    str = ""
+    cell.each{ |c|
+      str += "    if([item isKindOfClass:[#{c["class"]} class]])\n      return [#{c["itemclass"]} class];\n"
+    }
+    h.puts str
+    
+    str = "\n     return [TBCitySBTableViewErrorCell class]; \n\n}\n\n"
     h.puts str
     
     str = "//@optional:\n"

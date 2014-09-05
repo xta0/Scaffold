@@ -24,7 +24,7 @@
 		"class":"",
 		"protocols":[],
 		"models":[{"name":"","class":""}],
-		"datasource":{"name":"","class":"","cell":""},
+		"datasource":{"name":"","class":"","cell":[{"class":"","itemclass":""}]},
 		"delegate":{"name":"","class":""},
 		"logic":{"class":""}
 	}
@@ -32,8 +32,5 @@
 
 "view":{"xib":""},
 
-"author":"",
-
-"path":"./"
-
+"author":""
 }
