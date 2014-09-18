@@ -14,10 +14,10 @@ def T_ListItem::renderH(hash)
   list = hash["property"]
   template = <<-TEMPLATE
 
-@class <%= hash["superclass"] %>
+@class <%= hash["superclass"] %>;
 @interface <%=hash["class"] %> : <%= hash["superclass"] %>
 <% list.each{|obj| %> <% name = obj["name"] %> <% clz = obj["class"] %>
-@property(nonatomic,strong)<%= clz %> *<%= name %>;<%}%>
+@property(nonatomic,strong)<%= clz %> *<%= name %>;<%} if list%>
 
 @end
 

@@ -7,23 +7,23 @@ require './parser.rb'
 $arg0 = ARGV[0]
 $arg1 = ARGV[1]
 $arg2 = ARGV[2]
-$arg3 = ARGV[3]
 
-config_path = $arg0
-package_name = $arg1
+
+config_path = "./proj_config/kof.json"
+package_name = $arg0
 type = ""
 response_json_path = ""
 
-if $arg2.to_s.start_with?"-"
-	type = $arg2.to_s
+if $arg1.to_s.start_with?"-"
+	type = $arg1.to_s
 
-	if $arg3.to_s.end_with?".json"
-		response_json_path = $arg3.to_s
+	if $arg2.to_s.end_with?".json"
+		response_json_path = $arg2.to_s
 	end
 else
 	type = ""
-	if $arg2.to_s.end_with?".json"
-		response_json_path = $arg2.to_s
+	if $arg1.to_s.end_with?".json"
+		response_json_path = $arg1.to_s
 	end
 end
 
@@ -73,7 +73,7 @@ _err "Missing SDK name in config file!" if sdk_name.length == 0
 
 #create directory
 _log("Create Directory")
-FileUtils.mkdir_p ["#{package_name}/controller", "#{package_name}/model", "#{package_name}/view","#{package_name}/logic","#{package_name}/config","#{package_name}/item"]
+FileUtils.mkdir_p ["#{package_name}/controller", "#{package_name}/model", "#{package_name}/view" ,"#{package_name}/logic","#{package_name}/config","#{package_name}/item"]
 FileUtils.mkdir_p ["#{package_name}/datasource", "#{package_name}/delegate", "#{package_name}/cell"] if type == "-l"
 
 #get yaml
@@ -105,7 +105,7 @@ item_class 		= type == "-l" ? "#{clz_prefix}#{package_name}ListItem" : "#{clz_pr
 item_superclass = type == "-l" ? "#{template[:listitem][:class]}" : "#{template[:item][:class]}"
 item_tpath 		= type == "-l" ? "./template/#{sdk_name.downcase}/template_#{template[:listitem][:template]}.rb" : "./template/#{sdk_name.downcase}/template_#{template[:item][:template]}.rb"
 item_namespace 	= type == "-l" ? "#{template[:listitem][:namespace]}" : "#{template[:item][:namespace]}"
-item_filepath 	= "./#{package_name}/item/"
+item_filepath 	= type == "-l" ? "./#{package_name}/item/" : "./#{package_name}/item/"
 item_response   = response_json_path ? response_json_path : "" 
 
 #view

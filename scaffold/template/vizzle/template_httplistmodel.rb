@@ -10,7 +10,7 @@ def T_HTTPListModel::renderH(hash)
   
   template = <<-TEMPLATE
   
-@class <%= hash["superclass"] %>
+@class <%= hash["superclass"] %>;
 @interface <%=hash["class"] %> : <%= hash["superclass"] %>
 
 @end

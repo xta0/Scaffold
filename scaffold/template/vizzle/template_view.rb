@@ -12,8 +12,8 @@ def T_View::renderH(hash)
 
   template = <<-TEMPLATE
   
-@class <%= hash["itemclass"] %>
-@class <%= hash["superclass"] %>
+@class <%= hash["itemclass"] %>;
+@class <%= hash["superclass"] %>;
 
 @interface <%=hash["class"] %> : <%= hash["superclass"] %>
 
@@ -57,13 +57,12 @@ def T_View::renderM(hash)
 
 - (void)setItem:(<%= hash["itemclass"] %> *)item
 {
-    [super setItem:item];
   
 }
 
 - (void)layoutSubviews
 {
-    [super layoutSubViews];
+    [super layoutSubviews];
   
   
 }

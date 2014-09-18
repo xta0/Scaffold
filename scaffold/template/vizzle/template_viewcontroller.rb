@@ -12,7 +12,7 @@ def T_ViewController::renderH(hash)
   
   tmplate = <<-TEMPLATE
   
-@class <%= hash["superclass"] %>
+@class <%= hash["superclass"] %>;
 @interface <%=hash["class"] %> : <%= hash["superclass"] %>
 
 @end
@@ -33,12 +33,13 @@ def T_ViewController::renderM(hash)
 #import "<%= hash["class"] %>.h"
 #import "<%= hash["logic"]["class"] %>.h"
 <% list.each{|obj| %><% name = obj["name"] %> <% clz  = obj["class"] %>
-#import "<%= clz %>.h <% } %>
+#import "<%= clz %>.h" <% } if list %>
 
 @interface <%= hash["class"] %>()
 
 <% list.each{|obj| %><% name = obj["name"] %> <% clz  = obj["class"] %>
-@property(nonatomic,strong)<%= clz %> *<%= name %>; <% } %>
+@property(nonatomic,strong)<%= clz %> *<%= name %>; <% } if list %>
+@property(nonatomic,strong)<%= hash["logic"]["class"] %> *<%= hash["logic"]["name"] %>;
 
 @end
 

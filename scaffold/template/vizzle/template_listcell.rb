@@ -13,7 +13,7 @@ def T_ListCell::renderH(hash)
   
   template = <<-TEMPLATE
   
-@class <%= hash["superclass"] %>
+@class <%= hash["superclass"] %>;
 @interface <%=hash["class"] %> : <%= hash["superclass"] %>
 
 @end
@@ -65,11 +65,11 @@ template = <<-TEMPLATE
 
 - (void)layoutSubviews
 {
-    [super layoutSubViews];
+    [super layoutSubviews];
   
   
 }
-
+@end
   
   TEMPLATE
   

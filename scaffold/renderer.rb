@@ -116,7 +116,7 @@ end
 def touch(path,&block)
 
 	File.delete(path) if File.exist?path
-	File.open(path, "w+") { |file|  
+	File.open(path, "w") { |file|  
 
 		if block_given?
 			file.puts block.call

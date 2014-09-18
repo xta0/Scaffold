@@ -15,7 +15,7 @@ def T_ListViewController::renderH(hash)
   
   template = <<-TEMPLATE
   
-@class <%= hash["superclass"] %>
+@class <%= hash["superclass"] %>;
 @interface <%=hash["class"] %> : <%= hash["superclass"] %>
 
 @end
@@ -36,16 +36,17 @@ def T_ListViewController::renderM(hash)
 #import "<%= hash["class"] %>.h"
 #import "<%= hash["logic"]["class"] %>.h"
 <% list.each{|obj| %><% name = obj["name"] %> <% clz  = obj["class"] %>
-#import "<%= clz %>.h <% } %>
+#import "<%= clz %>.h" <% } if list%>
 #import "<%= hash["datasource"]["class"] %>.h"
 #import "<%= hash["delegate"]["class"] %>.h"
 
 @interface <%= hash["class"] %>()
 
 <% list.each{|obj| %><% name = obj["name"] %> <% clz  = obj["class"] %>
-@property(nonatomic,strong)<%= clz %> *<%= name %>; <% } %>
+@property(nonatomic,strong)<%= clz %> *<%= name %>; <% } if list %>
 @property(nonatomic,strong)<%= hash["datasource"]["class"] %> *<%= hash["datasource"]["name"] %>;
 @property(nonatomic,strong)<%= hash["delegate"]["class"] %> *<%= hash["delegate"]["name"] %>;
+@property(nonatomic,strong)<%= hash["logic"]["class"] %> *<%= hash["logic"]["name"] %>;
 
 @end
 
@@ -92,7 +93,7 @@ def T_ListViewController::renderM(hash)
         _<%= hash["logic"]["name"] %> = [<%= hash["logic"]["class"] %> new];
     }
 
-    return _<%= hash["logic"]["name"] %>
+    return _<%= hash["logic"]["name"] %>;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -123,8 +124,7 @@ def T_ListViewController::renderM(hash)
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.showsVerticalScrollIndicator = YES;
     self.tableView.separatorStyle = YES;
-    self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, APP_CONTENT_WIDTH, 1)];
- 
+    
     //2,set some properties:下拉刷新，自动翻页
     self.bNeedLoadMore = NO;
     self.bNeedPullRefresh = NO;
