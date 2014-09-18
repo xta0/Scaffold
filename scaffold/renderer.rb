@@ -167,7 +167,7 @@ def renderItem
 
 		 	property = Hash.new
 		 	property["name"] = k
-		 	property["class"] = _rb2objc(v)
+		 	property["class"] = _rb2objc(v.class)
 		 	propertylist.push property
 
 		}
