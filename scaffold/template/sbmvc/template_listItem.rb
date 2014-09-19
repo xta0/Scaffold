@@ -1,4 +1,8 @@
 
+
+#encoding:utf-8
+
+
 module T_ListItem 
 
 require 'erb'

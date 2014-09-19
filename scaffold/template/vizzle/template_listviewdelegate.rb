@@ -1,3 +1,5 @@
+#encoding:utf-8
+
 module T_ListViewDelegate
 
 require 'erb'

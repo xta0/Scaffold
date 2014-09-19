@@ -1,3 +1,6 @@
+#encoding:utf-8
+
+
 module T_ViewController
 
 require 'erb'

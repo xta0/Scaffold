@@ -1,5 +1,6 @@
+#encoding:utf-8
+
 require 'json'
-require 'colorize'
 require 'fileutils'
 require 'yaml'
 require './parser.rb'
@@ -34,7 +35,7 @@ end
 
 
 def _err(str)
-  puts "error:".red
+  puts "error:"
   puts str
   exit
 end

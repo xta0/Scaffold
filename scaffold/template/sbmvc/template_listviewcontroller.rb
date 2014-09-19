@@ -1,3 +1,5 @@
+#encoding:utf-8
+
 module T_ListViewController
 
 require 'erb'
@@ -126,11 +128,11 @@ def T_ListViewController::renderM(hash)
     self.tableView.separatorStyle = YES;
   
  
-    //2,set some properties:下拉刷新，自动翻页
+    //2,set some properties:
     self.bNeedLoadMore = NO;
     self.bNeedPullRefresh = NO;
 
-    //3，bind your delegate and datasource to tableview
+    //3,bind your delegate and datasource to tableview
     self.dataSource = self.ds;
     self.delegate = self.dl;
 
