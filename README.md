@@ -15,4 +15,4 @@ if the "MainPage" is list view , just add `-l` as the last param:
 
 `ruby vz_scaffold.rb MainPage -l`
 
-You are read to go now
+You are ready to go now
