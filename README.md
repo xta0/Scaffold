@@ -3,6 +3,10 @@ VZScaffold
 
 VZScaffold is an Objective-C code generator for Vizzle:https://github.com/Vizzle/Vizzle
 
+The idea was borrowed from Ruby on Rails.
+
+VZScaffold will help you build your model view controller template by typing just on command.
+
 
 How to Use it
 =============
