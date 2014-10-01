@@ -76,6 +76,7 @@ _err "Missing SDK name in config file!" if sdk_name.length == 0
 _log("Create Directory")
 FileUtils.mkdir_p ["#{package_name}/controller", "#{package_name}/model", "#{package_name}/view","#{package_name}/logic","#{package_name}/config","#{package_name}/item"]
 FileUtils.mkdir_p ["#{package_name}/datasource", "#{package_name}/delegate", "#{package_name}/cell"] if type == "-l"
+FileUtils.mkdir_p ["#{package_name}/resource"]
 
 #get yaml
 _log("Read YAML File : ./yml/#{sdk_name.downcase}.yml")
