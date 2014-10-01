@@ -47,6 +47,13 @@ def T_HTTPModel::renderM(hash)
     return nil;
 }
 
+- (NSDictionary* )headerParams{
+   
+    //todo:
+    
+    return nil;
+}
+
 - (NSString *)methodName {
    
     //todo:
