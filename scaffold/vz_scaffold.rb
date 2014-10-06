@@ -249,6 +249,16 @@ comment_hash["tpath"] 		= "./template/#{sdk_name.downcase}/template_#{template[:
 comment_hash["namespace"] 	= "#{template[:comment][:namespace]}"
 meta_hash["comment"] 		= comment_hash
 
+#config hash
+config_hash 					= Hash.new
+config_hash["proj"] 			= proj_name
+config_hash["package_name"] 	= package_name
+config_hash["tpath"]			= "./template/#{sdk_name.downcase}/template_#{template[:config][:template]}"
+config_hash["namespace"]		= "#{template[:config][:namespace]}"
+meta_hash["config"]				= config_hash
+
+
+
 #create meta.json
 meta_json_path = "./#{package_name}/config/#{package_name.downcase}_meta.json"
 _log "create meta.json:#{meta_json_path}"

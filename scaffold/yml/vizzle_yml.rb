@@ -14,7 +14,8 @@ hash = {:template => "Vizzle",
   :listmodel => {:class => "VZHTTPListModel",:template => "httplistmodel",:namespace => "T_HTTPListModel"},
   :viewcontroller => {:class => "VZViewController",:template => "viewcontroller",:namespace => "T_ViewController"},
   :logic => {:class => "VZViewControllerLogic",:template => "viewcontrollerlogic",:namespace => "T_ViewControllerLogic"},
-  :view => {:class => "UIView", :template => "view", :namespace => "T_View"}
+  :view => {:class => "UIView", :template => "view", :namespace => "T_View"},
+  :config => {:template => "config", :namespace => "T_Config"}
 }
 
 

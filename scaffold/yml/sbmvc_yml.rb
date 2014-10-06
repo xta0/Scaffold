@@ -14,7 +14,8 @@ hash = {:template => "SBMVC",
   :listmodel => {:class => "TBCitySBListModel",:template => "model",:namespace => "T_Model"},
   :viewcontroller => {:class => "TBCitySBViewController",:template => "viewcontroller",:namespace => "T_ViewController"},
   :logic => {:class => "TBCitySBBusinessLogic",:template => "viewcontrollerlogic",:namespace => "T_ViewControllerLogic"},
-  :view => {:class => "UIView", :template => "view", :namespace => "T_View"}
+  :view => {:class => "UIView", :template => "view", :namespace => "T_View"},
+  :config => {:template => "config", :namespace => "T_Config"}
 }
 
 

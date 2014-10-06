@@ -77,6 +77,7 @@ _log("Create Directory")
 FileUtils.mkdir_p ["#{package_name}/controller", "#{package_name}/model", "#{package_name}/view","#{package_name}/logic","#{package_name}/config","#{package_name}/item"]
 FileUtils.mkdir_p ["#{package_name}/datasource", "#{package_name}/delegate", "#{package_name}/cell"] if type == "-l"
 FileUtils.mkdir_p ["#{package_name}/resource"]
+FileUtils.mkdir_p ["#{package_name}/config"]
 
 #get yaml
 _log("Read YAML File : ./yml/#{sdk_name.downcase}.yml")
@@ -85,6 +86,7 @@ _err "Missing #{sdk_name.downcase}.yml in ./yml/" if not File.exist?(yaml_path)
 template = YAML.load(File.read(yaml_path))
 #check yaml
 _err "SDK name is inconsistant!!!" if template[:template].downcase != sdk_name.downcase
+
 
 #controller 
 controller_class  		= type == "-l" ? "#{clz_prefix}#{package_name}ListViewController" : "#{clz_prefix}#{package_name}ViewController"
@@ -248,6 +250,14 @@ comment_hash["author"] 		= author_name
 comment_hash["tpath"] 		= "./template/#{sdk_name.downcase}/template_#{template[:comment][:template]}"
 comment_hash["namespace"] 	= "#{template[:comment][:namespace]}"
 meta_hash["comment"] 		= comment_hash
+
+#config hash
+config_hash 					= Hash.new
+config_hash["proj"] 			= proj_name
+config_hash["package_name"] 	= package_name
+config_hash["tpath"]			= "./template/#{sdk_name.downcase}/template_#{template[:config][:template]}"
+config_hash["namespace"]		= "#{template[:config][:namespace]}"
+meta_hash["config"]				= config_hash
 
 #create meta.json
 meta_json_path = "./#{package_name}/config/#{package_name.downcase}_meta.json"
