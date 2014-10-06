@@ -76,8 +76,8 @@ _err "Missing SDK name in config file!" if sdk_name.length == 0
 _log("Create Directory")
 FileUtils.mkdir_p ["#{package_name}/controller", "#{package_name}/model", "#{package_name}/view","#{package_name}/logic","#{package_name}/config","#{package_name}/item"]
 FileUtils.mkdir_p ["#{package_name}/datasource", "#{package_name}/delegate", "#{package_name}/cell"] if type == "-l"
-FileUtils.mkdir_p ["#{package_name}/resource"]
-FileUtils.mkdir_p ["#{package_name}/config"]
+FileUtils.mkdir_p ["#{package_name}/resource","#{package_name}/config"]
+
 
 #get yaml
 _log("Read YAML File : ./yml/#{sdk_name.downcase}.yml")
@@ -87,6 +87,11 @@ template = YAML.load(File.read(yaml_path))
 #check yaml
 _err "SDK name is inconsistant!!!" if template[:template].downcase != sdk_name.downcase
 
+
+#config 
+config_filepath  	= "./#{package_name}/config/#{clz_prefix}#{package_name}Config.h"
+config_tpath 		= "./template/#{sdk_name.downcase}/template_#{template[:config][:template]}.rb"
+config_namespace    = "#{template[:config][:namespace]}"
 
 #controller 
 controller_class  		= type == "-l" ? "#{clz_prefix}#{package_name}ListViewController" : "#{clz_prefix}#{package_name}ViewController"
@@ -99,7 +104,7 @@ controller_filepath 	= "./#{package_name}/controller/"
 model_class 		= type == "-l" ? "#{clz_prefix}#{package_name}ListModel" : "#{clz_prefix}#{package_name}Model"
 model_superclass 	= type == "-l" ? "#{template[:listmodel][:class]}" : "#{template[:model][:class]}"
 model_name 			= type == "-l" ? "#{package_name.downcase}ListModel" : "#{package_name.downcase}Model"
-model_tpath 		= type == "-l" ? "./template/#{sdk_name.downcase}/template_#{template[:listmodel][:template]}" : "./template/#{sdk_name.downcase}/template_#{template[:model][:template]}.rb"
+model_tpath 		= type == "-l" ? "./template/#{sdk_name.downcase}/template_#{template[:listmodel][:template]}.rb" : "./template/#{sdk_name.downcase}/template_#{template[:model][:template]}.rb"
 model_namespace 	= type == "-l" ? "#{template[:listmodel][:namespace]}" :  "#{template[:model][:namespace]}"
 model_filepath 		= "./#{package_name}/model/"
 
@@ -247,7 +252,7 @@ comment_hash["class"] 		= ""
 comment_hash["comp"] 		= comp_name
 comment_hash["proj"] 		= proj_name
 comment_hash["author"] 		= author_name
-comment_hash["tpath"] 		= "./template/#{sdk_name.downcase}/template_#{template[:comment][:template]}"
+comment_hash["tpath"] 		= "./template/#{sdk_name.downcase}/template_#{template[:comment][:template]}.rb"
 comment_hash["namespace"] 	= "#{template[:comment][:namespace]}"
 meta_hash["comment"] 		= comment_hash
 
@@ -255,8 +260,9 @@ meta_hash["comment"] 		= comment_hash
 config_hash 					= Hash.new
 config_hash["proj"] 			= proj_name
 config_hash["package_name"] 	= package_name
-config_hash["tpath"]			= "./template/#{sdk_name.downcase}/template_#{template[:config][:template]}"
-config_hash["namespace"]		= "#{template[:config][:namespace]}"
+config_hash["tpath"]			= config_tpath
+config_hash["namespace"]		= config_namespace
+config_hash["filepath"]			= config_filepath
 meta_hash["config"]				= config_hash
 
 #create meta.json

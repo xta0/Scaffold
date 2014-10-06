@@ -50,20 +50,23 @@ def render
 		renderXIB
 
 	else
-			renderH
-			renderM
+		renderH
+		renderM
 	end
 
 end
 
 def renderH
 
+	#if method has been defined
+	template_module = Object.const_get(@hash_target["namespace"])
+	return if not template_module.respond_to? :renderH
+		
+
 	#puts @hash_target
 	clz = @hash_target["class"]
-	return if clz.length == 0
-
-	dir_path = @hash_target["filepath"]
-	file_path = "#{dir_path}"+"#{clz}.h"
+	file_path = @hash_target["filepath"]
+	file_path = "#{file_path}"+"#{clz}.h" if clz.to_s.length > 0
 
 	touch file_path do
 
@@ -71,10 +74,15 @@ def renderH
 		str_content = ""
 
 		#comment
-		@hash_comment["class"] = clz
-		comment_namespace = @hash_comment["namespace"]
-		str_comment = Object.const_get(comment_namespace)::render(@hash_comment,"h")
-		str_content += str_comment
+		if clz.to_s.length > 0
+			
+			@hash_comment["class"] = clz
+			comment_namespace = @hash_comment["namespace"]
+			str_comment = Object.const_get(comment_namespace)::render(@hash_comment,"h")
+			str_content += str_comment
+		
+		end
+	
 
 		#header file
 		header_namespace = @hash_target["namespace"]
@@ -87,11 +95,13 @@ end
 
 def renderM
 
-	clz = @hash_target["class"]
-	return if clz.length == 0
+	#if method has been defined
+	template_module = Object.const_get(@hash_target["namespace"])
+	return if not template_module.respond_to? :renderM
 
-	dir_path = @hash_target["filepath"]
-	file_path = "#{dir_path}"+"#{clz}.m"
+	clz = @hash_target["class"]
+	file_path = @hash_target["filepath"]
+	file_path = "#{file_path}"+"#{clz}.m" if clz.to_s.length > 0
 
 	touch file_path do
 
@@ -99,10 +109,14 @@ def renderM
 		str_content = ""
 
 		#comment
-		@hash_comment["class"] = clz
-		comment_namespace = @hash_comment["namespace"]
-		str_comment = Object.const_get(comment_namespace)::render(@hash_comment,"m")
-		str_content += str_comment
+		if clz.to_s.length > 0
+			
+			@hash_comment["class"] = clz
+			comment_namespace = @hash_comment["namespace"]
+			str_comment = Object.const_get(comment_namespace)::render(@hash_comment,"m")
+			str_content += str_comment
+		
+		end
 
 		#body file
 		header_namespace = @hash_target["namespace"]
