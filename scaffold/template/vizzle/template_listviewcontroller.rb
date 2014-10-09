@@ -12,6 +12,7 @@ hash = ARGV[0]
 #   model:[{name:xx,class:xx},....]
 #   datasource:{name:xxx,class:xxx,superclass:xxx}
 #   delegate:{name:xxx,class:xxx,superclass:xxx}
+#   logic :{class:xxx,name:xxx}
 # }
 def T_ListViewController::renderH(hash)
   
@@ -32,23 +33,26 @@ end
 
 def T_ListViewController::renderM(hash)
 
-  list = hash["model"];
+  list  = hash["model"];
+  logic = hash["logic"]
+  dl    = hash["dl"]
+  ds    = hash["ds"]
   template = <<-TEMPLATE
 
 #import "<%= hash["class"] %>.h"
-#import "<%= hash["logic"]["class"] %>.h"
+<% if logic %>#import "<%= hash["logic"]["class"] %>.h"<% end %>
 <% list.each{|obj| %><% name = obj["name"] %> <% clz  = obj["class"] %>
 #import "<%= clz %>.h" <% } if list%>
-#import "<%= hash["datasource"]["class"] %>.h"
-#import "<%= hash["delegate"]["class"] %>.h"
+<% if ds %>#import "<%= hash["datasource"]["class"] %>.h"<% end %>
+<% if dl %>#import "<%= hash["delegate"]["class"] %>.h"<% end %>
 
 @interface <%= hash["class"] %>()
 
 <% list.each{|obj| %><% name = obj["name"] %> <% clz  = obj["class"] %>
 @property(nonatomic,strong)<%= clz %> *<%= name %>; <% } if list %>
-@property(nonatomic,strong)<%= hash["datasource"]["class"] %> *<%= hash["datasource"]["name"] %>;
-@property(nonatomic,strong)<%= hash["delegate"]["class"] %> *<%= hash["delegate"]["name"] %>;
-@property(nonatomic,strong)<%= hash["logic"]["class"] %> *<%= hash["logic"]["name"] %>;
+<% if ds %>@property(nonatomic,strong)<%= hash["datasource"]["class"] %> *<%= hash["datasource"]["name"] %>;<% end %>
+<% if dl %>@property(nonatomic,strong)<%= hash["delegate"]["class"] %> *<%= hash["delegate"]["name"] %>;<% end %>
+<% if logic %>@property(nonatomic,strong)<%= hash["logic"]["class"] %> *<%= hash["logic"]["name"] %>;<% end %>
 
 @end
 
@@ -72,7 +76,7 @@ def T_ListViewController::renderM(hash)
     return _<%= name %>;
 }
 <%} %>
-
+<% if ds %>
 - (<%= hash["datasource"]["class"] %> *)<%= hash["datasource"]["name"] %>{
 
   if (!_<%= hash["datasource"]["name"] %>) {
@@ -80,7 +84,8 @@ def T_ListViewController::renderM(hash)
    }
    return _<%= hash["datasource"]["name"] %>;
 }
-
+<% end %>
+<% if dl %> 
 - (<%= hash["delegate"]["class"] %> *)<%= hash["delegate"]["name"] %>{
 
   if (!_<%= hash["delegate"]["name"] %>) {
@@ -88,7 +93,8 @@ def T_ListViewController::renderM(hash)
    }
    return _<%= hash["delegate"]["name"] %>;
 }
-
+<% end %>
+<% if logic%>
 - (<%= hash["logic"]["class"] %> *)<%= hash["logic"]["name"] %>
 {
     if(!_<%= hash["logic"]["name"] %>){
@@ -97,6 +103,7 @@ def T_ListViewController::renderM(hash)
 
     return _<%= hash["logic"]["name"] %>;
 }
+<% end %>
 
 ////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - life cycle methods
@@ -106,8 +113,9 @@ def T_ListViewController::renderM(hash)
     self = [super init];
     
     if (self) {
+      <% if logic %>
         self.logic = self.<%= hash["logic"]["name"] %>;
-        
+      <% end %>
     }
     return self;
 }
@@ -131,9 +139,11 @@ def T_ListViewController::renderM(hash)
     self.bNeedLoadMore = NO;
     self.bNeedPullRefresh = NO;
 
+    <% if ds && dl %>
     //3，bind your delegate and datasource to tableview
     self.dataSource = self.ds;
     self.delegate = self.dl;
+    <% end %>
 
     //4,@REQUIRED:YOU MUST SET A KEY MODEL!
     //self.keyModel = self.model;

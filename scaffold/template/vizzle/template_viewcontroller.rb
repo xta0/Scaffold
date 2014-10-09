@@ -29,11 +29,12 @@ end
 
 def T_ViewController::renderM(hash)
 
-  list = hash["model"];
+  list = hash["model"]
+  logic = hash["logic"]
   tmplate = <<-TEMPLATE
 
 #import "<%= hash["class"] %>.h"
-#import "<%= hash["logic"]["class"] %>.h"
+<% if logic %>#import "<%= hash["logic"]["class"] %>.h"<% end %>
 <% list.each{|obj| %><% name = obj["name"] %> <% clz  = obj["class"] %>
 #import "<%= clz %>.h" <% } if list %>
 
@@ -41,7 +42,7 @@ def T_ViewController::renderM(hash)
 
 <% list.each{|obj| %><% name = obj["name"] %> <% clz  = obj["class"] %>
 @property(nonatomic,strong)<%= clz %> *<%= name %>; <% } if list %>
-@property(nonatomic,strong)<%= hash["logic"]["class"] %> *<%= hash["logic"]["name"] %>;
+<% if logic %>@property(nonatomic,strong)<%= hash["logic"]["class"] %> *<%= hash["logic"]["name"] %>;<% end %>
 
 @end
 
@@ -55,7 +56,7 @@ def T_ViewController::renderM(hash)
 
 //////////////////////////////////////////////////////////// 
 #pragma mark - getters 
-
+<% if list %>
 <% list.each{|obj| %>  <% name = obj["name"] %> <% clz  = obj["class"] %>
 - (<%= clz %> *)<%= name %>
 {
@@ -65,8 +66,8 @@ def T_ViewController::renderM(hash)
     }
     return _<%= name %>;
 }
-<%} %>
-
+<%} %><% end %>
+<% if logic %>
 - (<%= hash["logic"]["class"] %> *)<%= hash["logic"]["name"] %>
 {
     if(!_<%= hash["logic"]["name"] %>){
@@ -74,7 +75,7 @@ def T_ViewController::renderM(hash)
     }
 
     return _<%= hash["logic"]["name"] %>
-}
+}<% end %>
 
 ////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - life cycle methods
@@ -84,7 +85,9 @@ def T_ViewController::renderM(hash)
     self = [super init];
     
     if (self) {
+        <% if logic %>
         self.logic = self.<%= hash["logic"]["name"] %>;
+        <% end %>
         
     }
     return self;

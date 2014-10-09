@@ -50,3 +50,13 @@
 :config:
   :template: config
   :namespace: T_Config
+:modeltest:
+  :class: XCTestCase
+  :sdkheader: VizzleConfig.h
+  :template: modeltest
+  :namespace: T_ModelTest
+:logictest:
+  :class: XCTestCase
+  :sdkheader: VizzleConfig.h
+  :template: logictest
+  :namespace: T_LogicTest

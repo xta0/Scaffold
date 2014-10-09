@@ -15,7 +15,9 @@ hash = {:template => "Vizzle",
   :viewcontroller => {:class => "VZViewController",:template => "viewcontroller",:namespace => "T_ViewController"},
   :logic => {:class => "VZViewControllerLogic",:template => "viewcontrollerlogic",:namespace => "T_ViewControllerLogic"},
   :view => {:class => "UIView", :template => "view", :namespace => "T_View"},
-  :config => {:template => "config", :namespace => "T_Config"}
+  :config => {:template => "config", :namespace => "T_Config"},
+  :modeltest => {:class => "XCTestCase",:sdkheader => "VizzleConfig.h",:template => "modeltest",:namespace => "T_ModelTest"},
+  :logictest => {:class => "XCTestCase",:sdkheader => "VizzleConfig.h",:template => "logictest",:namespace => "T_LogicTest"}
 }
 
 

@@ -2,7 +2,7 @@
 
 module PARSER
 
-require './renderer.rb'
+require './core/renderer.rb'
 
 def _err(str)
   puts "error:".red
@@ -16,7 +16,7 @@ def _log(str)
 end
 
 
-def PARSER::parse(json_path)
+def PARSER::parse_json_file(json_path)
 
 	_err "meta.json does not exist !!" if not File.exist?json_path
 
@@ -29,12 +29,20 @@ def PARSER::parse(json_path)
 	  puts "parse json file error"
 	end
 
+	PARSER::parse_json_obj(meta_json)
+
+
+end
+
+def PARSER::parse_json_obj(meta_json)
+
+
 	_log "Begin Creating Files..."
 
-	#comment
-	comment_hash = meta_json["comment"]
+	comment_hash = $comment_hash
 
-	meta_json.delete "comment"
+	puts "meta:#{meta_json}" 
+
 	meta_json.each{ |k,obj|
 
 		puts "Creating #{k.upcase}..."

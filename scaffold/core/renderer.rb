@@ -48,6 +48,10 @@ def render
 	elsif @hash_target["namespace"] == "T_View" || @hash_target["namespace"] == "T_ListCell"
 		
 		renderXIB
+	
+	elsif @hash_target["namespace"] == "T_Comment"
+		
+		renderH
 
 	else
 		renderH
@@ -58,7 +62,7 @@ end
 
 def renderH
 
-	#if method has been defined
+	#if method has not been defined
 	template_module = Object.const_get(@hash_target["namespace"])
 	return if not template_module.respond_to? :renderH
 		
@@ -89,7 +93,8 @@ def renderH
 		str_header = Object.const_get(header_namespace)::renderH(@hash_target)
 		str_content += str_header
 
-		end
+
+	end
 
 end
 
@@ -158,7 +163,7 @@ def renderItem
 
 	response_path = @hash_target["response"]
 
-	if response_path.length > 0
+	if response_path.to_s.length > 0
 	_err "response json does not exist !!" if not File.exist?response_path
 
 		##read response

@@ -13,6 +13,7 @@ require 'erb'
 
 def T_ListCell::renderH(hash)
   
+  item = hash["itemclass"]
   template = <<-TEMPLATE
   
 @class <%= hash["superclass"] %>;
@@ -33,7 +34,7 @@ def T_ListCell::renderM(hash)
 template = <<-TEMPLATE
 
 #import "<%= hash["class"] %>.h"
-#import "<%= hash["itemclass"] %>.h"
+<% if item %>#import "<%= hash["itemclass"] %>.h"<% end %>
 
 @interface <%= hash["class"] %>()
 
@@ -58,13 +59,13 @@ template = <<-TEMPLATE
 {
     return <%= hash["height"] %>;
 }
-
+<% if item %>
 - (void)setItem:(<%= hash["itemclass"] %> *)item
 {
     [super setItem:item];
   
 }
-
+<% end %>
 - (void)layoutSubviews
 {
     [super layoutSubviews];

@@ -12,14 +12,15 @@ require 'erb'
 
 def T_View::renderH(hash)
 
+  item = hash["itemclass"]
   template = <<-TEMPLATE
   
-@class <%= hash["itemclass"] %>;
+<% if item %>@class <%= hash["itemclass"] %>;<% end %>
 @class <%= hash["superclass"] %>;
 
 @interface <%=hash["class"] %> : <%= hash["superclass"] %>
 
-@property(nonatomic,strong) <%= hash["itemclass"] %> *item;
+<% if item %>@property(nonatomic,strong) <%= hash["itemclass"] %> *item;<% end %>
 
 @end
 
@@ -32,10 +33,11 @@ end
 
 def T_View::renderM(hash)
   
+  item = hash["itemclass"]
   template = <<-TEMPLATE
 
 #import "<%= hash["class"] %>.h"
-#import "<%= hash["itemclass"] %>.h"
+<% if item %>#import "<%= hash["itemclass"] %>.h"<% end %>
 
 @interface <%= hash["class"] %>()
 
@@ -56,12 +58,12 @@ def T_View::renderM(hash)
 
   return self;
 }
-
+<% if item %>
 - (void)setItem:(<%= hash["itemclass"] %> *)item
 {
   
 }
-
+<% end %>
 - (void)layoutSubviews
 {
     [super layoutSubviews];

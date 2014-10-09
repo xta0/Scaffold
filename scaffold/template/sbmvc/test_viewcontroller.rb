@@ -10,10 +10,17 @@ puts "==========================================="
 #   model:[{name:xx,class:xx},....]
 #   logic:{name:xx,class:xx}
 # }
+
+
 hash = {"class" => "TestViewController",
-        "superclass" => "TBCitySBViewController",
-        "model" => [{"name"=>"model1","class"=>"TestModel1"},{"name"=>"model2","class"=>"TestModel2"}],
-        "logic" => {"name"=>"","class"=>"TestLogic"}}
+        "superclass" => "TBCitySBViewController"
+        }
+
+# hash = {"class" => "TestViewController",
+#         "superclass" => "TBCitySBViewController",
+#         "model" => [{"name"=>"model1","class"=>"TestModel1"},{"name"=>"model2","class"=>"TestModel2"}],
+#         "logic" => {"name"=>"","class"=>"TestLogic"}}
+       
             
 h = T_ViewController::renderH(hash)
 puts h

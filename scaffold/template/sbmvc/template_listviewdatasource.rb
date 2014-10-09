@@ -29,10 +29,11 @@ end
 
 def T_ListViewDataSource::renderM(hash)
 
+cell = hash["cellclass"]
 template = <<-TEMPLATE
 
 #import "<%= hash["class"] %>.h"
-#import "<%= hash["cellclass"] %>.h"
+<% if cell %>#import "<%= hash["cellclass"] %>.h"<% end %>
 
 @interface <%= hash["class"] %>()
 
@@ -50,7 +51,12 @@ template = <<-TEMPLATE
 - (Class)cellClassForItem:(id)item AtIndex:(NSIndexPath *)indexPath{
 
     //@REQUIRED:
+    <% if cell %>
     return [<%= hash["cellclass"] %> class];
+    <% else %>
+    //todo : return a cell class
+    return nil;
+    <% end %>
 
 }
 
