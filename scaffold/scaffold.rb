@@ -18,7 +18,6 @@ def _log(str)
   puts str
 end
 
-BEGIN{puts "......BEGIN SCAFFOLDING......"}
 
 #define some global values
 $proj_json      = nil
@@ -36,14 +35,14 @@ options = CommandLineParse.parse(ARGV)
 puts options.inspect
 
 config_path = options[:optional_package_path]
-config_path = "./proj_config/icoupon.json" if not config_path
+config_path = "./proj_config/vizzle.json" if not config_path
 
 #parse json
 begin
 f = File.read(config_path)
   $proj_json = JSON.parse(f)
 rescue
-  _err "Parse #{config_path} filed"
+  _err "Parse #{config_path} failed"
 end
 
 #load global values
@@ -61,6 +60,7 @@ _log("Read YAML File : ./yml/#{$sdk_name.downcase}.yml")
 yaml_path = "./yml/#{$sdk_name.downcase}.yml"
 _err "Missing #{$sdk_name.downcase}.yml in ./yml/" if not File.exist?(yaml_path)
 $template = YAML.load(File.read(yaml_path))
+
 #check yaml
 _err "SDK name is inconsistant!!!" if $template[:template].downcase != $sdk_name.downcase
 
@@ -74,11 +74,14 @@ $comment_hash["tpath"] 		= "./template/#{$sdk_name.downcase}/template_#{$templat
 $comment_hash["namespace"] 	= "#{$template[:comment][:namespace]}"
 
 
+BEGIN{puts "......BEGIN SCAFFOLDING......"}
 
 #get type of creation
 type = options[:type]
 
 if type == "package"
+
+	_err "Can not find project config file!" if not config_path
 
 	meta_hash = Factory.createPackage(options)
 
@@ -86,10 +89,6 @@ if type == "package"
 	meta_json_path = "./#{package_name}/config/#{package_name.downcase}_meta.json"
 	_log "create meta.json:#{meta_json_path}"
 
-
-	puts "meta.hash:#{meta_hash}"
-
-	
 	meta_json = JSON.pretty_generate(meta_hash)
 	File.delete meta_json_path if File.exist? meta_json_path 
 	File.open(meta_json_path, "w") { |io| io.puts meta_json  }

@@ -10,8 +10,7 @@ class CommandLineParse
 	option_parser = OptionParser.new do |opts|
 
 		#create MVC Package
-		opts.on( "-p Package name, Package type, Optional package config file Path",Array,
-		         "Create a Package with type and project file path" ) do |list|
+		opts.on( "-p Package name, Package type, Optional package config file Path",Array) do |list|
 			
 			options[:type] = "package"
 		 	options[:package_name] = list[0]
@@ -61,8 +60,7 @@ class CommandLineParse
 		end
 
 		#create single class files
-		opts.on( "-c ClassName,SuperClass,Path",Array,
-	         "Create a class with name,superclass and probably a file" ) do |list|
+		opts.on( "-c ClassName,SuperClass,Path",Array) do |list|
 
 			options[:type] = "class"
 
@@ -74,6 +72,11 @@ class CommandLineParse
 	 		options[:optional_class_path] = list[1]
 
 		end
+
+	  opts.on_tail("-h", "--help") do
+        puts opts
+        exit
+      end
 
 
 	end #end of OptionParser.new

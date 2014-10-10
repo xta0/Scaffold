@@ -43,13 +43,15 @@ class Factory
 
 		ret = {}
 		
-		superclass = args[:superclass]
-		classname  = args[:class_name]
-		optional_path = args[:optional_class_path]
+		superclass 		= args[:superclass]
+		classname  		= args[:class_name]
+		optional_path 	= args[:optional_class_path]
 
 		params = {:type => "c", :class => classname, :superclass => superclass, :optional_path => optional_path}
 
 		rbclass = nil
+
+		puts $template
 
 		$template.each{|k,v|
 
@@ -74,6 +76,8 @@ class Factory
 			obj.create()
 			ret[classname] = obj.toHash()
 			puts "Hash:#{ret}"
+		else
+			puts "Can not find superclass in template"
 
 		end
 

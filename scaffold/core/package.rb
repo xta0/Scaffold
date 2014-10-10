@@ -59,7 +59,7 @@ class PackageMaker
 		logic 		= Logic.new(args)
 		logic.create()
 		
-		logicTest 	= Logic.new(args) 
+		logicTest 	= LogicTest.new(args) 
 		logicTest.logic = logic
 		logicTest.create()
 
