@@ -16,7 +16,8 @@ def T_ListCell::renderH(hash)
 item = hash["itemclass"]
 template = <<-TEMPLATE
   
-@class <%= hash["superclass"] %>;
+#import "<%= hash["superclass"] %>.h"
+
 @interface <%=hash["class"] %> : <%= hash["superclass"] %>
 
 @end

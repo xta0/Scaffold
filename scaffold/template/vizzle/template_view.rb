@@ -16,7 +16,8 @@ def T_View::renderH(hash)
   template = <<-TEMPLATE
   
 <% if item %>@class <%= hash["itemclass"] %>;<% end %>
-@class <%= hash["superclass"] %>;
+
+#import "<%= hash["superclass"] %>.h"
 
 @interface <%=hash["class"] %> : <%= hash["superclass"] %>
 

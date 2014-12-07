@@ -12,7 +12,8 @@ def T_HTTPListModel::renderH(hash)
   
   template = <<-TEMPLATE
   
-@class <%= hash["superclass"] %>;
+#import "<%= hash["superclass"] %>.h"
+
 @interface <%=hash["class"] %> : <%= hash["superclass"] %>
 
 @end

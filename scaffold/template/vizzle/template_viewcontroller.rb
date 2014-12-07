@@ -14,7 +14,8 @@ def T_ViewController::renderH(hash)
   
   tmplate = <<-TEMPLATE
   
-@class <%= hash["superclass"] %>;
+#import "<%= hash["superclass"] %>.h"
+
 @interface <%=hash["class"] %> : <%= hash["superclass"] %>
 
 @end
