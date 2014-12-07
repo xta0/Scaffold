@@ -23,7 +23,7 @@ def T_ModelTest::renderM(hash)
 
 @interface <%= hash["class"] %> : <%= hash["superclass"] %>
 
-@property(nonatomic,strong)<%= hash["modelclass"] %>* testModel;
+@property(nonatomic,strong)<%= hash["modelclass"] %>* model;
 
 @end
 
@@ -32,7 +32,7 @@ def T_ModelTest::renderM(hash)
 - (void)setUp {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
-    self.testModel = [<%= hash["modelclass"] %> new];
+    self.model = [<%= hash["modelclass"] %> new];
 }
 
 - (void)tearDown {
@@ -44,7 +44,7 @@ def T_ModelTest::renderM(hash)
   
 
     __block BOOL waitingForBlock = YES;
-    [self.testModel loadWithCompletion:^(<%= hash["modelclass"] %> *model, NSError *error) {
+    [self.model loadWithCompletion:^(<%= hash["modelclass"] %> *model, NSError *error) {
        
       //todo...
       //add some test logic here
