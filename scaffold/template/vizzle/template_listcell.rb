@@ -13,8 +13,8 @@ require 'erb'
 
 def T_ListCell::renderH(hash)
   
-  item = hash["itemclass"]
-  template = <<-TEMPLATE
+item = hash["itemclass"]
+template = <<-TEMPLATE
   
 @class <%= hash["superclass"] %>;
 @interface <%=hash["class"] %> : <%= hash["superclass"] %>
@@ -31,6 +31,7 @@ end
 
 def T_ListCell::renderM(hash)
 
+item = hash["itemclass"]
 template = <<-TEMPLATE
 
 #import "<%= hash["class"] %>.h"
