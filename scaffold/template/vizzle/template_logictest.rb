@@ -18,7 +18,7 @@ def T_LogicTest::renderM(hash)
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
-#import "<%= hash["sdkheader"] %>.h"
+#import "<%= hash["sdkheader"] %>"
 #import "<%= hash["logicclass"] %>.h"
 
 @interface <%= hash["class"] %> : <%= hash["superclass"] %>
@@ -32,7 +32,7 @@ def T_LogicTest::renderM(hash)
 - (void)setUp {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
-    self.logic = [<%= hash["modelclass"] %> new];
+    self.logic = [<%= hash["logicclass"] %> new];
     self.logic.viewController = self;
 }
 

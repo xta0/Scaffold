@@ -77,11 +77,9 @@ $comment_hash["namespace"] 	= "#{$template[:comment][:namespace]}"
 #get type of creation
 type = options[:type]
 
+BEGIN{puts "......BEGIN SCAFFOLDING......"}
+
 if type == "package"
-
-
-	BEGIN{puts "......BEGIN SCAFFOLDING......"}
-
 
 	_err "Can not find project config file!" if not config_path
 
@@ -98,9 +96,6 @@ if type == "package"
 	PARSER::parse_json_file(meta_json_path)
 
 elsif type == "class"
-
-
-    BEGIN{puts "......BEGIN SCAFFOLDING......"}
 
 	meta_hash = Factory.createClass(options)
 	PARSER::parse_json_obj(meta_hash)

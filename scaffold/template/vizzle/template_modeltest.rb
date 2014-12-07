@@ -18,7 +18,7 @@ def T_ModelTest::renderM(hash)
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
-#import "<%= hash["sdkheader"] %>.h"
+#import "<%= hash["sdkheader"] %>"
 #import "<%= hash["modelclass"] %>.h"
 
 @interface <%= hash["class"] %> : <%= hash["superclass"] %>

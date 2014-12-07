@@ -12,7 +12,7 @@ puts "==========================================="
 #}
 
 hash = {"class" => "LogicTest","superclass" => "XCTestCase","modelclass" => "MainPageLogic",
-        "sdkheader" => "VizzleConfig"}
+        "sdkheader" => "VizzleConfig.h"}
   
 puts "Hash Value : #{hash}"
 puts "\n"
