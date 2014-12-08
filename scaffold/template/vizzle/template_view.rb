@@ -17,7 +17,7 @@ def T_View::renderH(hash)
   
 <% if item %>@class <%= hash["itemclass"] %>;<% end %>
 
-#import "<%= hash["superclass"] %>.h"
+#import <UIKit/UIKit.h>
 
 @interface <%=hash["class"] %> : <%= hash["superclass"] %>
 

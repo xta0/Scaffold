@@ -150,22 +150,26 @@ def T_ViewController::renderM(hash)
 - (void)showModel:(VZModel *)model
 {
     //todo:
+    [super showModel:model];
 }
 
 - (void)showEmpty:(VZModel *)model
 {
     //todo:
+    [super showEmpty:model];
 }
 
 
 - (void)showLoading:(VZModel*)model
 {
     //todo:
+    [super showLoading:model];
 }
 
 - (void)showError:(NSError *)error withModel:(VZModel*)model
 {
     //todo:
+    [super showError:error withModel:model];
 }
 
 @end
