@@ -36,8 +36,8 @@ def T_ListViewController::renderM(hash)
 
   list  = hash["model"];
   logic = hash["logic"]
-  dl    = hash["dl"]
-  ds    = hash["ds"]
+  dl    = hash["delegate"]
+  ds    = hash["datasource"]
   template = <<-TEMPLATE
 
 #import "<%= hash["class"] %>.h"

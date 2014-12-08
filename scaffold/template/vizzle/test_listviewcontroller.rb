@@ -18,7 +18,7 @@ hash = {"class" => "TestListViewController",
         "model" => [{"name"=>"model1","class"=>"TestModel1"},{"name"=>"model2","class"=>"TestModel2"}],
         "datasource" => {"name"=>"ds","class"=>"TestViewDataSource"},
         "delegate"=>{"name"=>"dl","class"=>"TestViewDelegate"},
-        "logic" => {"name"=>"","class"=>"TestLogic"}}
+        "logic" => {"name"=>"logic","class"=>"TestLogic"}}
             
 h = T_ListViewController::renderH(hash)
 puts h
