@@ -1,7 +1,10 @@
 VZScaffold
 =============
 
-* VZScaffold 是一个命令行工具，它可以根据Vizzle框架自动生成Objective-C的代码模板
+* VZScaffold 是一个命令行工具，它可以根据[Vizzle](https://github.com/Vizzle/Vizzle)自动生成Objective-C的代码模板
+
+关于Vizzle:http://akadealloc.github.io/blog/2014/09/15/Vizzle.html
+
 * 它的使用方式借鉴了Rails中的代码生成工具——Scaffold:
 
 How to Use it
@@ -47,11 +50,11 @@ Example
 
 * 例3 ： 我们要生成一个类，名字叫MainPageModel，可输入下面命令:
 
-`% ruby scaffold.rb -c MainPageModel:TBCitySBListModel`
+`% ruby scaffold.rb -c MainPageModel:VZHTTPListModel`
 
 * 例4 ： 我们要生成一个类，名字叫MainPageItem，并自动生成response.json文件中对应字段的的property，可输入下面命令:
 
-`% ruby scaffold.rb -c MainPageItem:TBCitySBItem,./response.json`
+`% ruby scaffold.rb -c MainPageItem:VZListItem,./response.json`
 
 
 Template
