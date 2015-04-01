@@ -59,9 +59,6 @@ end
 class ViewController < BaseClass
 
 	attr_accessor :model
-	attr_accessor :logic
-
-
 	def create
 
 		self.objc_class  				= self.type == "p" ? "#{$clz_prefix}#{self.package_name}ViewController" : self.objc_class
@@ -78,7 +75,6 @@ class ViewController < BaseClass
 		controller_hash["class"] 		= self.objc_class
 		controller_hash["superclass"] 	= self.objc_superclass
 		controller_hash["model"] 		= [{"name"=>self.model.name,"class"=>self.model.objc_class,"superclass"=>self.model.objc_superclass}] if self.model
-		controller_hash["logic"] 		= {"name" =>self.logic.name,"class"=>self.logic.objc_class,"superclass"=>self.logic.objc_superclass} if self.logic
 		controller_hash["tpath"] 		= self.tpath
 		controller_hash["namespace"] 	= self.tnamespace
 		controller_hash["filepath"] 	= self.filepath
@@ -91,7 +87,6 @@ end
 class ListViewController < BaseClass
 
 	attr_accessor :model
-	attr_accessor :logic
 	attr_accessor :ds
 	attr_accessor :dl
 
@@ -115,7 +110,6 @@ class ListViewController < BaseClass
 		controller_hash["class"] 		= self.objc_class
 		controller_hash["superclass"] 	= self.objc_superclass
 		controller_hash["model"] 		= [{"name"=>self.model.name,"class"=>self.model.objc_class,"superclass"=>self.model.objc_superclass}] if self.model
-		controller_hash["logic"] 		= {"name" =>self.logic.name,"class"=>self.logic.objc_class,"superclass"=>self.logic.objc_superclass} if self.logic
 		controller_hash["datasource"] 	= {"name"=>self.ds.name,"class"=>self.ds.objc_class,"superclass" => self.ds.objc_superclass} if self.ds
 		controller_hash["delegate"] 	= {"name"=>self.dl.name,"class"=>self.dl.objc_class,"superclass" => self.dl.objc_superclass} if self.dl
 		controller_hash["tpath"] 		= self.tpath
@@ -338,67 +332,6 @@ class View < BaseClass
 
 end
 
-
-class Logic < BaseClass
-
-	def create
-
-		self.objc_class 	 = self.type == "p" ? "#{$clz_prefix}#{self.package_name}Logic" : self.objc_class
-		self.objc_superclass = self.type == "p" ? "#{$template[:logic][:class]}" : self.objc_superclass
-		self.filepath 		 = self.type == "p" ? "./#{self.package_name}/logic/" : "./"
-		self.name 			 = self.type == "p" ? "#{self.package_name.downcase}Logic" : ""
-		self.tpath 			= "./template/#{$sdk_name.downcase}/template_#{$template[:logic][:template]}.rb"
-		self.tnamespace 		= "#{$template[:logic][:namespace]}"
- 
-	end
-
-
-	def toHash
-
-
-		logic_hash 					= Hash.new
-		logic_hash["class"] 		= self.objc_class
-		logic_hash["superclass"] 	= self.objc_superclass
-		logic_hash["tpath"] 		= self.tpath
-		logic_hash["namespace"] 	= self.tnamespace
-		logic_hash["filepath"] 		= self.filepath
-		logic_hash
-	end
-
-end
-
-class LogicTest < BaseClass
-
-
-	attr_accessor :sdkheader, :logic
-
-	def create
-
-		self.objc_class 	 = self.type == "p" ? "#{self.logic.objc_class}Test" : self.objc_class
-		self.objc_superclass = self.type == "p" ? "#{$template[:logictest][:class]}" : "./"
-		self.filepath 		 = self.type == "p" ?  "./#{self.package_name}/test/" : "./"
-
-		self.sdkheader 			= "#{$template[:logictest][:sdkheader]}"
-		self.tpath 				= "./template/#{$sdk_name.downcase}/template_#{$template[:logictest][:template]}.rb"
-		self.tnamespace 		= "#{$template[:logictest][:namespace]}"
-
-	end
-
-	def toHash
-
-		model_test_hash = {}
-		model_test_hash["class"] 		= self.objc_class
-		model_test_hash["superclass"] 	= self.objc_superclass
-		model_test_hash["logicclass"] 	= self.logic.objc_class
-		model_test_hash["sdkheader"] 	= self.sdkheader
-		model_test_hash["tpath"] 		= self.tpath
-		model_test_hash["namespace"] 	= self.tnamespace
-		model_test_hash["filepath"] 	= self.filepath
-		model_test_hash
-
-	end
-
-end
 
 class ListDataSource < BaseClass
 

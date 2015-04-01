@@ -34,14 +34,12 @@ end
 
 def T_ListViewController::renderM(hash)
 
-  list  = hash["model"];
-  logic = hash["logic"]
+  list  = hash["model"]
   dl    = hash["delegate"]
   ds    = hash["datasource"]
   template = <<-TEMPLATE
 
 #import "<%= hash["class"] %>.h"
-<% if logic %>#import "<%= hash["logic"]["class"] %>.h"<% end %>
 <% list.each{|obj| %><% name = obj["name"] %> <% clz  = obj["class"] %>
 #import "<%= clz %>.h" <% } if list%>
 <% if ds %>#import "<%= hash["datasource"]["class"] %>.h"<% end %>
@@ -53,7 +51,6 @@ def T_ListViewController::renderM(hash)
 @property(nonatomic,strong)<%= clz %> *<%= name %>; <% } if list %>
 <% if ds %>@property(nonatomic,strong)<%= hash["datasource"]["class"] %> *<%= hash["datasource"]["name"] %>;<% end %>
 <% if dl %>@property(nonatomic,strong)<%= hash["delegate"]["class"] %> *<%= hash["delegate"]["name"] %>;<% end %>
-<% if logic %>@property(nonatomic,strong)<%= hash["logic"]["class"] %> *<%= hash["logic"]["name"] %>;<% end %>
 
 @end
 
@@ -95,31 +92,9 @@ def T_ListViewController::renderM(hash)
    return _<%= hash["delegate"]["name"] %>;
 }
 <% end %>
-<% if logic%>
-- (<%= hash["logic"]["class"] %> *)<%= hash["logic"]["name"] %>
-{
-    if(!_<%= hash["logic"]["name"] %>){
-        _<%= hash["logic"]["name"] %> = [<%= hash["logic"]["class"] %> new];
-    }
-
-    return _<%= hash["logic"]["name"] %>;
-}
-<% end %>
 
 ////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - life cycle methods
-
-- (id)init
-{
-    self = [super init];
-    
-    if (self) {
-      <% if logic %>
-        self.logic = self.<%= hash["logic"]["name"] %>;
-      <% end %>
-    }
-    return self;
-}
 
 - (void)loadView
 {

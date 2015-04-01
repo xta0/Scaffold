@@ -25,7 +25,7 @@ class PackageMaker
 	def config
 	
 		_log("Create Directory")
-		FileUtils.mkdir_p ["#{self.package_name}/controller", "#{self.package_name}/model", "#{self.package_name}/view","#{self.package_name}/logic","#{self.package_name}/item"]
+		FileUtils.mkdir_p ["#{self.package_name}/controller", "#{self.package_name}/model", "#{self.package_name}/view","#{self.package_name}/item"]
 		FileUtils.mkdir_p ["#{self.package_name}/resource","#{self.package_name}/config","#{self.package_name}/test"]
 
 	end
@@ -55,18 +55,10 @@ class PackageMaker
 		modelTest.model = model
 		modelTest.create()
 
-		##create logic hash
-		logic 		= Logic.new(args)
-		logic.create()
-		
-		logicTest 	= LogicTest.new(args) 
-		logicTest.logic = logic
-		logicTest.create()
 
 		##create view controller
 		controller 		 = ViewController.new(args)
 		controller.model = model
-		controller.logic = logic
 		controller.create()
 
 		#create item
@@ -83,8 +75,6 @@ class PackageMaker
 		meta_hash["controller"] 		= [].push controller.toHash
 		meta_hash["model"] 				= [].push model.toHash
 		meta_hash["modeltest"]			= [].push modelTest.toHash
-		meta_hash["logic"]				= [].push logic.toHash
-		meta_hash["logictest"]			= [].push logicTest.toHash
 		meta_hash["item"]				= [].push item.toHash
 		meta_hash["view"]				= [].push view.toHash
 		meta_hash["config"]				= config.toHash
@@ -111,14 +101,7 @@ class PackageMaker
 		listModelTest   = ModelTest.new(args)
 		listModelTest.model = listModel
 		listModelTest.create()
-
-		##create logic hash
-		logic 		= Logic.new(args)
-		logic.create()
-
-		logicTest 	= LogicTest.new(args) 
-		logicTest.logic = logic
-		logicTest.create() 
+ 
 
 		#create item
 		listItem = ListItem.new(args)
@@ -141,7 +124,6 @@ class PackageMaker
 		##create view controller
 		listController = ListViewController.new(args)
 		listController.model = listModel
-		listController.logic = logic
 		listController.ds = ds
 		listController.dl = dl
 		listController.create()
@@ -152,8 +134,6 @@ class PackageMaker
 		meta_hash["controller"] 		= [].push listController.toHash
 		meta_hash["model"] 				= [].push listModel.toHash
 		meta_hash["modeltest"]			= [].push listModelTest.toHash
-		meta_hash["logic"]				= [].push logic.toHash
-		meta_hash["logictest"]			= [].push logicTest.toHash
 		meta_hash["item"]				= [].push listItem.toHash
 		meta_hash["cell"]				= [].push listCell.toHash
 		meta_hash["datasource"]			= [].push ds.toHash

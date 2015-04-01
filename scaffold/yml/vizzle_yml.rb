@@ -13,11 +13,9 @@ hash = {:template => "Vizzle",
   :model => {:class => "VZHTTPModel",:template => "httpmodel",:namespace => "T_HTTPModel",:rbclass => "Model"},
   :listmodel => {:class => "VZHTTPListModel",:template => "httplistmodel",:namespace => "T_HTTPListModel",:rbclass =>"ListModel"},
   :viewcontroller => {:class => "VZViewController",:template => "viewcontroller",:namespace => "T_ViewController",:rbclass => "ViewController"},
-  :logic => {:class => "VZViewControllerLogic",:template => "viewcontrollerlogic",:namespace => "T_ViewControllerLogic",:rbclass => "Logic"},
   :view => {:class => "UIView", :template => "view", :namespace => "T_View",:rbclass => "View"},
   :config => {:template => "config", :namespace => "T_Config",:rbclass => "ConfigHeader"},
-  :modeltest => {:class => "XCTestCase",:sdkheader => "VizzleConfig.h",:template => "modeltest",:namespace => "T_ModelTest",:rbclass => "ModelTest"},
-  :logictest => {:class => "XCTestCase",:sdkheader => "VizzleConfig.h",:template => "logictest",:namespace => "T_LogicTest",:rbclass => "LogicTest"}
+  :modeltest => {:class => "XCTestCase",:sdkheader => "VizzleConfig.h",:template => "modeltest",:namespace => "T_ModelTest",:rbclass => "ModelTest"}
 }
 
 
