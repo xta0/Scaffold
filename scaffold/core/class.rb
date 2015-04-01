@@ -128,7 +128,7 @@ class Model < BaseClass
 		self.objc_class 		= self.type == "p" ? "#{$clz_prefix}#{self.package_name}Model" : self.objc_class
 		self.objc_superclass 	= self.type == "p" ? "#{$template[:model][:class]}" : self.objc_superclass
 		self.filepath 			= self.type == "p" ? "./#{self.package_name}/model/" : "./"
-		self.name 				= self.type == "p" ? "#{self.package_name.downcase}Model" : ""
+		self.name 				= self.type == "p" ? "#{self.package_name[0].downcase + self.package_name[1..-1]}Model" : ""
 		self.tpath 				= "./template/#{$sdk_name.downcase}/template_#{$template[:model][:template]}.rb"
 		self.tnamespace 		= "#{$template[:model][:namespace]}"
 		
@@ -190,7 +190,7 @@ class ListModel < BaseClass
 		self.objc_class 			= self.type == "p" ? "#{$clz_prefix}#{self.package_name}ListModel" : self.objc_class
 		self.objc_superclass 		= self.type == "p" ? "#{$template[:listmodel][:class]}" : self.objc_superclass
 		self.filepath 				= self.type == "p" ? "./#{self.package_name}/model/" : "./"
-		self.name 					= self.type == "p" ? "#{self.package_name.downcase}ListModel" : ""
+		self.name 					= self.type == "p" ? "#{self.package_name[0].downcase + self.package_name[1..-1] }ListModel" : ""
 		self.tpath 					= "./template/#{$sdk_name.downcase}/template_#{$template[:listmodel][:template]}.rb"
 		self.tnamespace 			= "#{$template[:listmodel][:namespace]}"
 		
