@@ -169,13 +169,14 @@ class ModelTest < BaseClass
 	def toHash
 
 		model_test_hash = {}
-		model_test_hash["class"] 		= self.objc_class
-		model_test_hash["superclass"] 	= self.objc_superclass
-		model_test_hash["modelclass"] 	= self.model.objc_class
-		model_test_hash["sdkheader"] 	= self.sdkheader
-		model_test_hash["tpath"] 		= self.tpath
-		model_test_hash["namespace"] 	= self.tnamespace
-		model_test_hash["filepath"] 	= self.filepath
+		model_test_hash["class"] 			= self.objc_class
+		model_test_hash["superclass"] 		= self.objc_superclass
+		model_test_hash["modelclass"] 		= self.model.objc_class
+		model_test_hash["modelsuperclass"]  = self.model.objc_superclass
+		model_test_hash["sdkheader"] 		= self.sdkheader
+		model_test_hash["tpath"] 			= self.tpath
+		model_test_hash["namespace"] 		= self.tnamespace
+		model_test_hash["filepath"] 		= self.filepath
 		model_test_hash
 
 	end

@@ -14,7 +14,11 @@ require 'erb'
 
 def T_ModelTest::renderM(hash)
   
+  model_class = hash["modelclass"]
+  model_name  = model_class[0].downcase + model_class[1..-1]
+
   template = <<-TEMPLATE
+
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
@@ -23,7 +27,7 @@ def T_ModelTest::renderM(hash)
 
 @interface <%= hash["class"] %> : <%= hash["superclass"] %>
 
-@property(nonatomic,strong)<%= hash["modelclass"] %>* model;
+@property(nonatomic,strong)<%= hash["modelclass"] %>* <%= model_name %>;
 
 @end
 
@@ -32,24 +36,34 @@ def T_ModelTest::renderM(hash)
 - (void)setUp {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
-    self.model = [<%= hash["modelclass"] %> new];
+    self.<%= model_name %> = [<%= hash["modelclass"] %> new];
 }
 
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
+
+    [self.<%= model_name %> cancel];
+    self.<%= model_name %> = nil;
 }
 
-- (void)testModel {
+- (void)testConnection {
   
 
     __block BOOL waitingForBlock = YES;
-    [self.model loadWithCompletion:^(<%= hash["modelclass"] %> *model, NSError *error) {
+    [self.<%= model_name %> loadWithCompletion:^(<%= hash["modelsuperclass"] %> *model, NSError *error) {
        
-      //todo...
-      //add some test logic here
 
-        XCTAssert(!error, @"Pass");
+        <%= model_class %>* <%= model_name %> = (<%= model_class %>* )model;
+        if (!error)
+        {
+        
+        }
+        else
+        {
+            XCTFail(@"Connection Failed:%@",error);
+        }
+
         waitingForBlock = NO;
         
     }];
