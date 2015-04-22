@@ -112,8 +112,8 @@ def T_ListViewController::renderM(hash)
     self.tableView.separatorStyle = YES;
     
     //2,set some properties:下拉刷新，自动翻页
-    self.bNeedLoadMore = NO;
-    self.bNeedPullRefresh = NO;
+    self.needLoadMore = NO;
+    self.needPullRefresh = NO;
 
     <% if ds && dl %>
     //3，bind your delegate and datasource to tableview
@@ -125,10 +125,10 @@ def T_ListViewController::renderM(hash)
     //self.keyModel = self.model;
     
     //5,REQUIRED:register model to parent view controller
-    [self registerModel:self.keyModel];
+    //[self registerModel:self.keyModel];
 
     //6,Load Data
-    [self load];
+    //[self load];
 }
 
 - (void)viewWillAppear:(BOOL)animated
