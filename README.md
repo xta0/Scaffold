@@ -3,8 +3,6 @@ VZScaffold
 
 * VZScaffold 是一个命令行工具，它可以根据[Vizzle](https://github.com/Vizzle/Vizzle)自动生成Objective-C的代码模板
 
-关于Vizzle:http://akadealloc.github.io/blog/2014/09/15/Vizzle.html
-
 * 它的使用方式借鉴了Rails中的代码生成工具——Scaffold:
 
 How to Use it
@@ -30,7 +28,7 @@ VZScaffold使用ruby编写，在MAC上无需安装，可以直接使用：
 参数`-p`用来生成一个package，它包括：
 
 * 完整的MVC代码
-* Model和Logic文件的单元测试代码
+* Model的单元测试代码
 * config文件和文件夹
 * resource文件夹
 
