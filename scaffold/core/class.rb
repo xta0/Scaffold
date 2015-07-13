@@ -105,7 +105,6 @@ class ListViewController < BaseClass
 
 	def toHash
 
-	
 		controller_hash 				= {}
 		controller_hash["class"] 		= self.objc_class
 		controller_hash["superclass"] 	= self.objc_superclass
@@ -137,7 +136,6 @@ class Model < BaseClass
 	
 	def toHash
 
-		
 		model_hash 					= Hash.new
 		model_hash["class"] 		= self.objc_class
 		model_hash["superclass"] 	= self.objc_superclass
@@ -276,7 +274,6 @@ class ListItem < BaseClass
 
 
 	def toHash
-
 
 		item_hash  				= Hash.new
 		item_hash["class"] 		= self.objc_class

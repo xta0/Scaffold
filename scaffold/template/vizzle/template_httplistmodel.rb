@@ -63,7 +63,7 @@ def T_HTTPListModel::renderM(hash)
     return nil;
 }
 
-- (NSMutableArray* )responseObjects:(id)JSON
+- (NSMutableArray* )responseObjects:(id)object
 {
   
     //todo:

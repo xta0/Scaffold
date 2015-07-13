@@ -29,7 +29,7 @@ $sdk_name    	= nil
 $template       = nil
 $comment_hash   = nil
 
-
+ 
 #parse command line
 options = CommandLineParse.parse(ARGV)
 puts options.inspect

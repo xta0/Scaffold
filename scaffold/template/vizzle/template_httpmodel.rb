@@ -43,32 +43,24 @@ def T_HTTPModel::renderM(hash)
 
 - (NSDictionary *)dataParams {
     
-    //todo:
-      
+
     return nil;
 }
 
 - (NSDictionary* )headerParams{
-   
-    //todo:
-    
+
     return nil;
 }
 
 - (NSString *)methodName {
    
-    //todo:
-   
+
     return nil;
 }
 
-- (BOOL)parseResponse:(id)JSON
+- (BOOL)parseResponse:(id)object
 {
-    //todo:
-  
-
-
-    return NO;
+    return YES;
 }
 
 @end
