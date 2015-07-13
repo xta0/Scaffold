@@ -25,8 +25,8 @@ def createViews(path,author)
     bind_clz = v["data"].keys[0]
     bind_name = v["data"].values[0]
     
-    if clz == "TBCitySBTableViewCell"
-        imports.push("TBCitySBTableViewCell")
+    if clz == "VZListCell"
+        imports.push("VZListCell")
         imports.push(bind_clz) if(bind_clz)
     else
        imports.push(bind_clz) if(bind_clz)
@@ -83,7 +83,7 @@ def createViews(path,author)
       if clz == 'UIView'
         str = "\n- (id)initWithFrame:(CGRect)frame \n{"
         str += "\n  self = [super initWithFrame:frame]; \n\n  if (self) { \n"
-      elsif clz == 'TBCitySBTableViewCell'
+      elsif clz == 'VZListCell'
         str = "\n- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier \n{"
         str += "\n  if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) { \n\n"
       end
@@ -102,7 +102,7 @@ def createViews(path,author)
       #set item
       if(bind_clz)
         5.times{f.puts "\n"}
-        if(clz == "TBCitySBTableViewCell")
+        if(clz == "VZListCell")
           f.puts "- (void)setItem:(#{bind_clz} *)item{\n      [super setItem:item];\n      //todo... \n\n}\n"
         else
           f.puts "- (void)setItem:(#{bind_clz} *)#{bind_name}{\n      _#{bind_name} = #{bind_name};\n     //todo... \n\n}\n"

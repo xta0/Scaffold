@@ -62,7 +62,7 @@ template = <<-TEMPLATE
 }
 
 //@optional:
-//- (TBCitySBTableViewItem*)itemForCellAtIndexPath:(NSIndexPath*)indexPath{
+//- (VZListItem* )itemForCellAtIndexPath:(NSIndexPath*)indexPath{
 
     //default:
     //return [super itemForCellAtIndexPath:indexPath]; 
