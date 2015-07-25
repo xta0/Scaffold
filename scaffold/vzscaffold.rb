@@ -20,7 +20,7 @@ end
 
 
 #define some global values
-$proj_json      = nil
+$proj_config      = nil
 $proj_name   	= nil
 $comp_name   	= nil
 $author_name 	= nil
@@ -35,24 +35,24 @@ options = CommandLineParse.parse(ARGV)
 puts options.inspect
 
 config_path = options[:optional_package_path]
-config_path = "./proj_config/vizzle.json" if not config_path
+config_path = "./config/_config.yml" if not config_path
 
-#parse json
+#parse yemal
 begin
-f = File.read(config_path)
-  $proj_json = JSON.parse(f)
+  $proj_config = YAML.load(File.read(config_path))
 rescue
   _err "Parse #{config_path} failed"
 end
 
 #load global values
-_log($proj_json)
+_log($proj_config)
 
-$proj_name   = $proj_json["proj"] ? $proj_json["proj"] : ""
-$comp_name   = $proj_json["comp"] ? $proj_json["comp"] : ""
-$author_name = $proj_json["author"] ? $proj_json["author"] : ENV['USER']
-$clz_prefix  = $proj_json["clz_prefix"] ? $proj_json["clz_prefix"] : ""
-$sdk_name    = $proj_json["sdk"] ? $proj_json["sdk"] : ""
+$proj_name   = $proj_config[:proj] ? $proj_config[:proj] : ""
+puts "proj_name:#{$proj_name}"
+$comp_name   = $proj_config[:comp] ? $proj_config[:comp] : ""
+$author_name = $proj_config[:author] ? $proj_config[:author] : ENV['USER']
+$clz_prefix  = $proj_config[:clz_prefix] ? $proj_config[:clz_prefix] : ""
+$sdk_name    = $proj_config[:sdk] ? $proj_config[:sdk] : ""
 _err "Missing SDK name in config file!" if $sdk_name.length == 0
 
 #get yaml

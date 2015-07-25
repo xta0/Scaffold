@@ -2,11 +2,11 @@
 
 require 'yaml'
 
-hash = {:template => "Vizzle",
+sdk_hash = {:template => "Vizzle",
   :comment => {:template => "comment",:namespace => "T_Comment"},
   :cell => {:class => "VZListCell" ,:template => "listcell",:namespace => "T_ListCell",:rbclass => "ListCell"},
   :listitem => {:class => "VZListItem" ,:template => "listItem",:namespace => "T_ListItem",:rbclass => "ListItem"},
-  :item => {:class => "VZItem" ,:template => "item",:namespace => "T_Item",:rbclass => "Item",:rbclass => "Item"},
+  :item => {:class => "VZItem" ,:template => "item",:namespace => "T_Item",:rbclass => "Item"},
   :listviewcontroller => {:class => "VZListViewController" ,:template => "listviewcontroller",:namespace => "T_ListViewController",:rbclass => "ListViewController"},
   :listviewdatasource => {:class => "VZListViewDataSource" ,:template => "listviewdatasource",:namespace => "T_ListViewDataSource",:rbclass => "ListDataSource"},
   :listviewdelegate => {:class => "VZListViewDelegate" ,:template => "listviewdelegate",:namespace => "T_ListViewDelegate",:rbclass => "ListDelegate"},
@@ -17,8 +17,4 @@ hash = {:template => "Vizzle",
   :config => {:template => "config", :namespace => "T_Config",:rbclass => "ConfigHeader"},
   :modeltest => {:class => "XCTestCase",:sdkheader => "VizzleConfig.h",:template => "modeltest",:namespace => "T_ModelTest",:rbclass => "ModelTest"}
 }
-
-
-puts hash.to_yaml
-
-File.open("vizzle.yml","w+"){|f| f.puts hash.to_yaml}
+File.open("vizzle.yml","w+"){|f| f.puts sdk_hash.to_yaml}

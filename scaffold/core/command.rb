@@ -64,12 +64,29 @@ class CommandLineParse
 
 			options[:type] = "class"
 
-			arg1 = list[0].split(':')[0]
-	 		arg2 = list[0].split(':')[1]
-	 		
-	 		options[:class_name] = arg1
-	 		options[:superclass] = arg2
-	 		options[:optional_class_path] = list[1]
+			if list.count == 1
+				arg1_l = list[0].split(':')[0]
+	 			arg1_r = list[0].split(':')[1]
+	 			options[:class_name] = arg1_l
+	 			options[:superclass] = arg1_r
+
+	 		elsif list.count == 2
+	 			
+	 			arg1_l = list[0].split(':')[0]
+	 			arg1_r = list[0].split(':')[1]
+
+	 	 		arg2_l = list[1].split(':')[0]
+	 	 		arg2_r = list[1].split(':')[1]
+
+				options[:class_name] = arg1_l
+	 			options[:superclass] = arg1_r
+	 	 		
+	 	 		if arg2_l == "path"
+	 	 			options[:optional_class_path] = arg2_r
+	 	 		end
+	 	 	
+	 		end
+
 
 		end
 
