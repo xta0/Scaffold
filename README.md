@@ -1,42 +1,31 @@
-VZScaffold
-=============
+## Scaffold
 
-* VZScaffold 是一个命令行工具，它可以根据[Vizzle](https://github.com/Vizzle/Vizzle)自动生成Objective-C的代码模板
+Scaffold 是一个基于Ruby的命令行工具，是[Vizzle](https://github.com/Vizzle/Vizzle)配套的页面的脚手架工具
 
-* 它的使用方式借鉴了Rails中的代码生成工具——Scaffold:
+## How to Use it
 
-How to Use it
-=============
+Scaffold使用ruby编写，在MAC上无需安装，可以直接使用：
 
-VZScaffold使用ruby编写，在MAC上无需安装，可以直接使用：
-
-`% cd scaffold`
-
-`% ruby scaffold.rb --help`
-
-输出如下：
-
-`Usage: scaffold [options]`
-
-`-p Package name, Package type, Optional package config file Path`
-
-`-c ClassName,SuperClass,Path`
-
-`-h, --help`
+```shell
+> ruby scaffold.rb --help`
 
 
-参数`-p`用来生成一个package，它包括：
+Usage: vzscaffold [options]
+    -p Package name, Package type, Optional package config file Path
+    -c ClassName,SuperClass,Path
+    -h, --help
+```
 
-* 完整的MVC代码
-* Model的单元测试代码
-* config文件和文件夹
-* resource文件夹
+- 参数`-p`用来生成一个package，它包括：
+  - 完整的MVC代码
+  - Model的单元测试代码
+  - config文件和文件夹
+  - resource文件夹
 
-参数 `-c`用来生成某个单独类的模板
+- 参数 `-c`用来生成某个单独类的模板
 
 
-Example
-=============
+### Example
 
 * 例1 ： 我们要生成一个新业务包，名字叫MainPage，可输入下面命令：
 
@@ -55,10 +44,13 @@ Example
 `% ruby scaffold.rb -c MainPageItem:VZListItem,./response.json`
 
 
-Template
-=============
+### Template
 
 所有的代码模板在`./template/vizzle`文件夹下
+
+## License
+
+Solutions licensed under MIT License
 
 
 
