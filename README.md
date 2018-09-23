@@ -14,7 +14,7 @@ Usage: vzscaffold [options]
     -p Package name, Package type, Optional package config file Path
     -c ClassName,SuperClass,Path
     -h, --help
-``
+```
 
 - 参数`-p`用来生成一个package，它包括：
   - 完整的MVC代码
